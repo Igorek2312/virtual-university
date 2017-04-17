@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ua.km.khnu.virtual.university.model.Faculty;
 import ua.km.khnu.virtual.university.model.Specialty;
 import ua.km.khnu.virtual.university.repository.FacultyRepository;
@@ -17,6 +18,7 @@ import static ua.km.khnu.virtual.university.util.EntityUtils.throwNotFoundIfNotE
  * @author Igor Rybak
  */
 @Service
+@Transactional
 public class SpecialtyServiceImpl implements SpecialtyService {
     private SpecialtyRepository specialtyRepository;
     private FacultyRepository facultyRepository;

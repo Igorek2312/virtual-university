@@ -14,6 +14,7 @@ import ua.km.khnu.virtual.university.transfare.SpecialtyForm;
  * @author igorek2312
  */
 @RestController
+@RequestMapping("/")
 public class SpecialtyController {
     private SpecialtyService specialtyService;
 
@@ -23,8 +24,9 @@ public class SpecialtyController {
     }
 
     @PostMapping("/specialties")
+    @ResponseStatus(HttpStatus.CREATED)
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    private Specialty create(@RequestBody SpecialtyForm form) {
+    public Specialty create(@RequestBody SpecialtyForm form) {
         return specialtyService.create(form);
     }
 
