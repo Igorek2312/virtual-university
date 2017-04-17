@@ -10,10 +10,14 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 import ua.km.khnu.virtual.university.transfare.LoginForm;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
@@ -24,16 +28,26 @@ import java.util.List;
 @Component
 public class LoginServiceImpl implements LoginService {
 
+    private final CloseableHttpClient httpClient;
+
     @Autowired
-    private CloseableHttpClient httpClient;
+    public LoginServiceImpl(CloseableHttpClient httpClient) {
+        this.httpClient = httpClient;
+    }
 
     @Override
     public String login(LoginForm form) throws IOException {
-        HttpPost httpPost = new HttpPost("http://localhost:8080/api/v1/oauth/token");
+        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
+
+        StringBuffer url = request.getRequestURL();
+        String uri = request.getRequestURI();
+        String host = url.substring(0, url.indexOf(uri));
+
+        HttpPost httpPost = new HttpPost(host + "/api/v1/oauth/token");
         String base64 = new String(Base64.getEncoder().encode("webapp:123456".getBytes()));
         httpPost.addHeader("Authorization", "Basic " + base64);
 
-        List<NameValuePair> params = new ArrayList<NameValuePair>();
+        List<NameValuePair> params = new ArrayList<>();
         params.add(new BasicNameValuePair("grant_type", "password"));
         params.add(new BasicNameValuePair("username", form.getUsername()));
         params.add(new BasicNameValuePair("password", form.getPassword()));
