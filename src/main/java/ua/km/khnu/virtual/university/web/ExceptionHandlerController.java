@@ -4,9 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
 import ua.km.khnu.virtual.university.error.CustomException;
 import ua.km.khnu.virtual.university.error.ErrorInfo;
 
@@ -15,7 +15,7 @@ import ua.km.khnu.virtual.university.error.ErrorInfo;
  *
  * @author Igor Rybak
  */
-@ControllerAdvice
+@RestControllerAdvice
 public class ExceptionHandlerController {
     @Autowired
     private MessageSource messageSource;
@@ -28,7 +28,6 @@ public class ExceptionHandlerController {
      * @return response with body of information about error and corresponding status
      */
     @ExceptionHandler(CustomException.class)
-    @ResponseBody
     public ResponseEntity<ErrorInfo> handleBoilerplateException(CustomException e) {
         ErrorInfo errorInfo = new ErrorInfo(e.getCode(), e.getInterpolatedDescription());
 

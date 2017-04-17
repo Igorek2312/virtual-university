@@ -1,12 +1,12 @@
 package ua.km.khnu.virtual.university.transfare;
 
 /**
- * @author Igor Rybak
+ * @author igorek2312
  */
-public class SpecialtyForm {
+public class GroupForm {
     private String name;
 
-    private int facultyId;
+    private int specialtyId;
 
     public String getName() {
         return name;
@@ -16,11 +16,11 @@ public class SpecialtyForm {
         this.name = name;
     }
 
-    public int getFacultyId() {
-        return facultyId;
+    public int getSpecialtyId() {
+        return specialtyId;
     }
 
-    public void setFacultyId(int facultyId) {
-        this.facultyId = facultyId;
+    public void setSpecialtyId(int specialtyId) {
+        this.specialtyId = specialtyId;
     }
 }

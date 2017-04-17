@@ -21,7 +21,7 @@ public class AccountController {
     }
 
     @ApiOperation(
-            value = "remove Bearer in Authorization;<br> Usernames/password: teacher/4321 - teacher; student/1234 - student; ",
+            value = "remove Bearer in Authorization; Usernames/password: teacher/4321 - teacher; student/1234 - student;",
             nickname = "foo!"
     )
     @GetMapping("/login")
