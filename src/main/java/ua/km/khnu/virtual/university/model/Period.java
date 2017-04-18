@@ -14,9 +14,7 @@ public class Period {
     private byte periodNumber;
     private String defaultType;
     private Classroom classroom;
-    private Group group;
-    private Teacher teacher;
-    private SubjectInstance subjectInstance;
+    private TeacherSubjectInstance teacherSubjectInstance;
 
     @Id
     @GeneratedValue
@@ -76,32 +74,12 @@ public class Period {
     }
 
     @ManyToOne
-    @JoinColumn(name = "group_id", referencedColumnName = "id", nullable = false)
-    public Group getGroup() {
-        return group;
+    @JoinColumn(name = "teacher_subject_instance_id", referencedColumnName = "id", nullable = false)
+    public TeacherSubjectInstance getTeacherSubjectInstance() {
+        return teacherSubjectInstance;
     }
 
-    public void setGroup(Group group) {
-        this.group = group;
-    }
-
-    @ManyToOne
-    @JoinColumn(name = "teacher_id", referencedColumnName = "id", nullable = false)
-    public Teacher getTeacher() {
-        return teacher;
-    }
-
-    public void setTeacher(Teacher teacher) {
-        this.teacher = teacher;
-    }
-
-    @ManyToOne
-    @JoinColumn(name = "subject_instance_id", referencedColumnName = "id", nullable = false)
-    public SubjectInstance getSubjectInstance() {
-        return subjectInstance;
-    }
-
-    public void setSubjectInstance(SubjectInstance subjectInstance) {
-        this.subjectInstance = subjectInstance;
+    public void setTeacherSubjectInstance(TeacherSubjectInstance teacherSubjectInstance) {
+        this.teacherSubjectInstance = teacherSubjectInstance;
     }
 }

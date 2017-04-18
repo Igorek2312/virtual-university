@@ -19,6 +19,7 @@ public class SubjectInstance {
     private LocalDate dateEnd;
     private Duration hours;
     private Subject subject;
+    private Group group;
 
     @Id
     @GeneratedValue
@@ -85,5 +86,15 @@ public class SubjectInstance {
 
     public void setSubject(Subject subject) {
         this.subject = subject;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "group_id", referencedColumnName = "id", nullable = false)
+    public Group getGroup() {
+        return group;
+    }
+
+    public void setGroup(Group group) {
+        this.group = group;
     }
 }
