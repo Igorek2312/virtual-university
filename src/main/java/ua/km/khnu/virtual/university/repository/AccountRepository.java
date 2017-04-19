@@ -5,6 +5,6 @@ import ua.km.khnu.virtual.university.model.Account;
 
 import java.util.Optional;
 
-public interface AccountsRepository extends JpaRepository<Account, Integer> {
+public interface AccountRepository extends JpaRepository<Account, Integer> {
     Optional<Account> findByUsername(String username);
 }

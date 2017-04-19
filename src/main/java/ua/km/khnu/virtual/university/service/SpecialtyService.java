@@ -11,13 +11,13 @@ import ua.km.khnu.virtual.university.transfare.SpecialtyForm;
 public interface SpecialtyService {
     Specialty create(SpecialtyForm form);
 
-    Specialty get(Integer id);
+    Specialty get(int id);
 
     Page<Specialty> getAll(Pageable pageable);
 
-    Specialty update(SpecialtyForm form, Integer id);
+    Specialty update(SpecialtyForm form, int id);
 
-    void delete(Integer id);
+    void delete(int id);
 
     Page<Specialty> getByFaculty(int facultyId, Pageable pageable);
 }

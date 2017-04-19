@@ -7,18 +7,18 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import ua.km.khnu.virtual.university.model.Account;
-import ua.km.khnu.virtual.university.repository.AccountsRepository;
+import ua.km.khnu.virtual.university.repository.AccountRepository;
 
 import java.util.Collection;
 
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
     @Autowired
-    private AccountsRepository accountsRepository;
+    private AccountRepository accountRepository;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Account account = accountsRepository.findByUsername(username)
+        Account account = accountRepository.findByUsername(username)
                 .orElseThrow(() -> new UsernameNotFoundException("User does not exist"));
 
         return new UserRepositoryUserDetails(account);

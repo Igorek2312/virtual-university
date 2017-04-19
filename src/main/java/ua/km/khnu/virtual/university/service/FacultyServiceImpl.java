@@ -41,12 +41,12 @@ public class FacultyServiceImpl implements FacultyService {
     }
 
     @Override
-    public Faculty get(Integer id) {
+    public Faculty get(int id) {
         return retrieveOneOrThrowNotFound(facultyRepository::findOne, id, Faculty.class);
     }
 
     @Override
-    public Faculty update(FacultyForm facultyForm, Integer id) {
+    public Faculty update(FacultyForm facultyForm, int id) {
         Faculty faculty = retrieveOneOrThrowNotFound(facultyRepository::findOne, id, Faculty.class);
         faculty.setName(facultyForm.getName());
         facultyRepository.save(faculty);
@@ -54,7 +54,7 @@ public class FacultyServiceImpl implements FacultyService {
     }
 
     @Override
-    public void delete(Integer id) {
+    public void delete(int id) {
         throwNotFoundIfNotExists(facultyRepository::exists, id, Faculty.class);
         facultyRepository.delete(id);
     }

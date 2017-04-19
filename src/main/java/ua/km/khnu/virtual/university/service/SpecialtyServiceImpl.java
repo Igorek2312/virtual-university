@@ -42,7 +42,7 @@ public class SpecialtyServiceImpl implements SpecialtyService {
     }
 
     @Override
-    public Specialty get(Integer id) {
+    public Specialty get(int id) {
         return retrieveOneOrThrowNotFound(specialtyRepository::findOne, id, Specialty.class);
     }
 
@@ -52,7 +52,7 @@ public class SpecialtyServiceImpl implements SpecialtyService {
     }
 
     @Override
-    public Specialty update(SpecialtyForm form, Integer id) {
+    public Specialty update(SpecialtyForm form, int id) {
         Specialty specialty = retrieveOneOrThrowNotFound(specialtyRepository::findOne, id, Specialty.class);
         specialty.setName(form.getName());
         specialtyRepository.save(specialty);
@@ -60,7 +60,7 @@ public class SpecialtyServiceImpl implements SpecialtyService {
     }
 
     @Override
-    public void delete(Integer id) {
+    public void delete(int id) {
         throwNotFoundIfNotExists(specialtyRepository::exists, id, Specialty.class);
         specialtyRepository.delete(id);
     }

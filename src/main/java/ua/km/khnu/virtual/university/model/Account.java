@@ -1,6 +1,7 @@
 package ua.km.khnu.virtual.university.model;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -14,7 +15,7 @@ public class Account {
     private String middleName;
     private String username;
     private String password;
-    private Set<Role> roles;
+    private Set<Role> roles=new HashSet<>();
     private String documentNumber;
     private boolean enabled;
 

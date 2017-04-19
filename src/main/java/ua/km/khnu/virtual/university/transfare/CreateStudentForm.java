@@ -3,12 +3,11 @@ package ua.km.khnu.virtual.university.transfare;
 /**
  * @author igorek2312
  */
-public class StudentForm {
+public class CreateStudentForm {
     private String documentNumber;
     private String firstName;
     private String lastName;
     private String middleName;
-    private String roleName;
 
     private String financeType;
     private String recordBookNumber;
@@ -44,14 +43,6 @@ public class StudentForm {
 
     public void setMiddleName(String middleName) {
         this.middleName = middleName;
-    }
-
-    public String getRoleName() {
-        return roleName;
-    }
-
-    public void setRoleName(String roleName) {
-        this.roleName = roleName;
     }
 
     public String getFinanceType() {

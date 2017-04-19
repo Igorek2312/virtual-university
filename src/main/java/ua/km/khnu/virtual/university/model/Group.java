@@ -59,11 +59,11 @@ public class Group {
 
     @ManyToOne
     @JoinColumn(name = "specialty_id", referencedColumnName = "id", nullable = false)
-    public Specialty getSpecialtyBySpecialtyId() {
+    public Specialty getSpecialty() {
         return specialty;
     }
 
-    public void setSpecialtyBySpecialtyId(Specialty specialty) {
+    public void setSpecialty(Specialty specialty) {
         this.specialty = specialty;
     }
 

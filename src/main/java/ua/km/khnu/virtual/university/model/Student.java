@@ -1,5 +1,7 @@
 package ua.km.khnu.virtual.university.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
 /**
@@ -44,6 +46,7 @@ public class Student {
 
     @ManyToOne
     @JoinColumn(name = "group_id", referencedColumnName = "id", nullable = false)
+    @JsonIgnore
     public Group getGroup() {
         return group;
     }
@@ -54,6 +57,7 @@ public class Student {
 
     @ManyToOne
     @JoinColumn(name = "account_id", referencedColumnName = "id", nullable = false)
+    @JsonIgnore
     public Account getAccount() {
         return account;
     }

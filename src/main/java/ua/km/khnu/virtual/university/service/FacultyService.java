@@ -13,9 +13,9 @@ public interface FacultyService {
 
     Page<Faculty> getAll(Pageable pageable);
 
-    Faculty get(Integer id);
+    Faculty get(int id);
 
-    Faculty update(FacultyForm faculty, Integer id);
+    Faculty update(FacultyForm faculty, int id);
 
-    void delete(Integer id);
+    void delete(int id);
 }
