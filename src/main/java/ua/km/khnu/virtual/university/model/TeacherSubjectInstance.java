@@ -3,7 +3,7 @@ package ua.km.khnu.virtual.university.model;
 import javax.persistence.*;
 
 /**
- * @author igorek2312
+ * @author Igor Rybak
  */
 @Entity
 @Table(name = "teacher_subject_instance")
@@ -12,6 +12,13 @@ public class TeacherSubjectInstance {
     private String periodType;
     private Teacher teacher;
     private SubjectInstance subjectInstance;
+
+    public TeacherSubjectInstance() {
+    }
+
+    public TeacherSubjectInstance(int id) {
+        this.id = id;
+    }
 
     @Id
     @Column(name = "id")

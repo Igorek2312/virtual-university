@@ -16,6 +16,13 @@ public class Period {
     private Classroom classroom;
     private TeacherSubjectInstance teacherSubjectInstance;
 
+    public Period() {
+    }
+
+    public Period(Integer id) {
+        this.id = id;
+    }
+
     @Id
     @GeneratedValue
     @Column(name = "id")

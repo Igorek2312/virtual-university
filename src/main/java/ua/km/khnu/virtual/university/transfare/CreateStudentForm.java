@@ -1,7 +1,7 @@
 package ua.km.khnu.virtual.university.transfare;
 
 /**
- * @author igorek2312
+ * @author Igor Rybak
  */
 public class CreateStudentForm {
     private String documentNumber;

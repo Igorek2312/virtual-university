@@ -5,19 +5,16 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
-import org.modelmapper.AbstractConverter;
 import org.modelmapper.ModelMapper;
-import org.modelmapper.PropertyMap;
-import org.modelmapper.internal.converter.AssignableConverter;
-import org.modelmapper.spi.MappingContext;
+import ua.km.khnu.virtual.university.config.GeneralConfiguration;
 import ua.km.khnu.virtual.university.model.Account;
 import ua.km.khnu.virtual.university.model.Group;
 import ua.km.khnu.virtual.university.model.Role;
 import ua.km.khnu.virtual.university.model.Student;
-import ua.km.khnu.virtual.university.repository.AccountRepository;
-import ua.km.khnu.virtual.university.repository.GroupRepository;
-import ua.km.khnu.virtual.university.repository.RoleRepository;
-import ua.km.khnu.virtual.university.repository.StudentRepository;
+import ua.km.khnu.virtual.university.repositories.AccountRepository;
+import ua.km.khnu.virtual.university.repositories.GroupRepository;
+import ua.km.khnu.virtual.university.repositories.RoleRepository;
+import ua.km.khnu.virtual.university.repositories.StudentRepository;
 import ua.km.khnu.virtual.university.transfare.CreateStudentForm;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -45,12 +42,14 @@ public class StudentServiceTest {
 
     @Before
     public void setUp() throws Exception {
+        GeneralConfiguration configuration = new GeneralConfiguration();
+        ModelMapper modelMapper = configuration.modelMapper();
         studentService = new StudentServiceImpl(
                 accountRepository,
                 roleRepository,
                 studentRepository,
                 groupRepository,
-                new ModelMapper()
+                modelMapper
         );
     }
 
@@ -98,6 +97,4 @@ public class StudentServiceTest {
         assertEquals("budget", result.getFinanceType());
         assertEquals("111111", result.getRecordBookNumber());
     }
-
-
 }

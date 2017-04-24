@@ -7,16 +7,15 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ua.km.khnu.virtual.university.model.Group;
 import ua.km.khnu.virtual.university.model.Specialty;
-import ua.km.khnu.virtual.university.repository.GroupRepository;
-import ua.km.khnu.virtual.university.repository.SpecialtyRepository;
+import ua.km.khnu.virtual.university.repositories.GroupRepository;
+import ua.km.khnu.virtual.university.repositories.SpecialtyRepository;
 import ua.km.khnu.virtual.university.transfare.GroupForm;
-import ua.km.khnu.virtual.university.util.EntityUtils;
 
 import static ua.km.khnu.virtual.university.util.EntityUtils.retrieveOneOrThrowNotFound;
 import static ua.km.khnu.virtual.university.util.EntityUtils.throwNotFoundIfNotExists;
 
 /**
- * @author igorek2312
+ * @author Igor Rybak
  */
 @Service
 @Transactional
@@ -42,11 +41,9 @@ public class GroupServiceImpl implements GroupService {
                 Specialty.class
         );
 
-        Specialty specialty = specialtyRepository.getOne(groupForm.getSpecialtyId());
-
         Group group = new Group();
         group.setName(groupForm.getName());
-        group.setSpecialty(specialty);
+        group.setSpecialty(new Specialty(groupForm.getSpecialtyId()));
         groupRepository.save(group);
         return group;
     }

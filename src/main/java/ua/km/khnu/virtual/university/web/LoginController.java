@@ -1,6 +1,5 @@
 package ua.km.khnu.virtual.university.web;
 
-import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,8 +10,7 @@ import ua.km.khnu.virtual.university.transfare.LoginForm;
 import java.io.IOException;
 
 @RestController
-@Api("foo !!!")
-public class AccountController {
+public class LoginController {
     private LoginService loginService;
 
     @Autowired
@@ -21,11 +19,12 @@ public class AccountController {
     }
 
     @ApiOperation(
-            value = "remove Bearer in Authorization; Usernames/password: teacher/4321 - teacher; student/1234 - student;",
-            nickname = "foo!"
+            value = "remove Bearer in Authorization; Usernames/password: teacher/4321 - teacher; student/1234 - student;"
     )
     @GetMapping("/login")
     public Object login(LoginForm form) throws IOException {
         return loginService.login(form);
     }
+
+
 }

@@ -5,12 +5,11 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
-import javax.sql.DataSource;
 import java.net.URI;
 import java.net.URISyntaxException;
 
 /**
- * @author igorek2312
+ * @author Igor Rybak
  */
 @Configuration
 @Profile("heroku")

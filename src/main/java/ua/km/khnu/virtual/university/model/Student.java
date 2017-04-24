@@ -57,7 +57,6 @@ public class Student {
 
     @ManyToOne
     @JoinColumn(name = "account_id", referencedColumnName = "id", nullable = false)
-    @JsonIgnore
     public Account getAccount() {
         return account;
     }

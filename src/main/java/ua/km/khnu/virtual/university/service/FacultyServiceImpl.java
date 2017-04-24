@@ -5,7 +5,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import ua.km.khnu.virtual.university.model.Faculty;
-import ua.km.khnu.virtual.university.repository.FacultyRepository;
+import ua.km.khnu.virtual.university.repositories.FacultyRepository;
 import ua.km.khnu.virtual.university.transfare.FacultyForm;
 
 import javax.transaction.Transactional;

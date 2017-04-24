@@ -14,6 +14,13 @@ public class Subject {
     private String name;
     private String department;
 
+    public Subject() {
+    }
+
+    public Subject(Integer id) {
+        this.id = id;
+    }
+
     @Id
     @GeneratedValue
     @Column(name = "id")

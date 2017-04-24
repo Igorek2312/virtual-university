@@ -6,7 +6,7 @@ import ua.km.khnu.virtual.university.model.Group;
 import ua.km.khnu.virtual.university.transfare.GroupForm;
 
 /**
- * @author igorek2312
+ * @author Igor Rybak
  */
 public interface GroupService {
     Group create(GroupForm groupForm);

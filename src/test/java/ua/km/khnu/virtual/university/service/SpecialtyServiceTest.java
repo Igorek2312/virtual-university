@@ -11,9 +11,9 @@ import org.springframework.data.domain.PageRequest;
 import ua.km.khnu.virtual.university.error.NoEntityWithSuchIdCustomException;
 import ua.km.khnu.virtual.university.model.Faculty;
 import ua.km.khnu.virtual.university.model.Specialty;
-import ua.km.khnu.virtual.university.repository.FacultyRepository;
-import ua.km.khnu.virtual.university.repository.SpecialtyRepository;
-import ua.km.khnu.virtual.university.transfare.SpecialtyForm;
+import ua.km.khnu.virtual.university.repositories.FacultyRepository;
+import ua.km.khnu.virtual.university.repositories.SpecialtyRepository;
+import ua.km.khnu.virtual.university.transfare.CreateSpecialtyForm;
 
 import java.util.Arrays;
 
@@ -45,27 +45,26 @@ public class SpecialtyServiceTest {
     @Test
     public void create() throws Exception {
         when(facultyRepository.exists(2)).thenReturn(true);
-        when(facultyRepository.getOne(2)).thenReturn(new Faculty());
         when(specialtyRepository.save(any(Specialty.class))).thenAnswer(invocation -> {
             Specialty specialty = invocation.getArgumentAt(0, Specialty.class);
             specialty.setId(1);
             return specialty;
         });
 
-        SpecialtyForm form = new SpecialtyForm();
+        CreateSpecialtyForm form = new CreateSpecialtyForm();
         form.setName("foo");
         form.setFacultyId(2);
         Specialty specialty = specialtyService.create(form);
 
         assertEquals(Integer.valueOf(1), specialty.getId());
         assertEquals("foo", specialty.getName());
-        assertNotNull(specialty.getFaculty());
+        assertEquals(Integer.valueOf(2), specialty.getFaculty().getId());
     }
 
     @Test(expected = NoEntityWithSuchIdCustomException.class)
     public void createWithNotExistingFaculty() throws Exception {
         when(facultyRepository.exists(2)).thenReturn(false);
-        SpecialtyForm form = new SpecialtyForm();
+        CreateSpecialtyForm form = new CreateSpecialtyForm();
         form.setFacultyId(2);
         specialtyService.create(form);
     }
@@ -124,7 +123,7 @@ public class SpecialtyServiceTest {
         specialty.setName("foo");
         when(specialtyRepository.findOne(1)).thenReturn(specialty);
 
-        SpecialtyForm form = new SpecialtyForm();
+        CreateSpecialtyForm form = new CreateSpecialtyForm();
         form.setName("foo1");
         Specialty result = specialtyService.update(form, 1);
 

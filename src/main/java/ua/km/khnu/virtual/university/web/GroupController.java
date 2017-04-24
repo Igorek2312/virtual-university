@@ -11,7 +11,7 @@ import ua.km.khnu.virtual.university.service.GroupService;
 import ua.km.khnu.virtual.university.transfare.GroupForm;
 
 /**
- * @author igorek2312
+ * @author Igor Rybak
  */
 @RestController
 public class GroupController {

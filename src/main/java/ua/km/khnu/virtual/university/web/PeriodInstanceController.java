@@ -1,37 +1,49 @@
 package ua.km.khnu.virtual.university.web;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import ua.km.khnu.virtual.university.model.PeriodInstance;
+import ua.km.khnu.virtual.university.service.PeriodInstanceService;
+import ua.km.khnu.virtual.university.transfare.CreatePeriodInstanceForm;
+import ua.km.khnu.virtual.university.transfare.UpdatePeriodInstanceForm;
 
 /**
- * @author igorek2312
+ * @author Igor Rybak
  */
 @RestController
 public class PeriodInstanceController {
+    private PeriodInstanceService periodInstanceService;
+
+    @Autowired
+    public void setPeriodInstanceService(PeriodInstanceService periodInstanceService) {
+        this.periodInstanceService = periodInstanceService;
+    }
+
     @PostMapping("/period-instances")
     @ResponseStatus(HttpStatus.CREATED)
-    public PeriodInstance create() {
-        return null;
+    public PeriodInstance create(@RequestBody CreatePeriodInstanceForm form) {
+        return periodInstanceService.create(form);
     }
 
     @GetMapping("/period-instances")
     public Page<PeriodInstance> getAll(Pageable pageable) {
-        return null;
+        return periodInstanceService.getAll(pageable);
     }
 
     @PutMapping("/period-instances/{periodInstanceId}")
     public PeriodInstance update(
             @PathVariable int periodInstanceId,
-            @RequestBody PeriodInstance periodInstance
+            @RequestBody UpdatePeriodInstanceForm form
     ) {
-        return null;
+        return periodInstanceService.update(periodInstanceId, form);
     }
 
     @DeleteMapping("/period-instances/{periodInstanceId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete(@PathVariable int periodInstanceId) {
+        periodInstanceService.delete(periodInstanceId);
     }
 }

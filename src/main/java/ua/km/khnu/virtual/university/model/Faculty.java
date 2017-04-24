@@ -11,6 +11,13 @@ public class Faculty {
     private Integer id;
     private String name;
 
+    public Faculty() {
+    }
+
+    public Faculty(Integer id) {
+        this.id = id;
+    }
+
     @Id
     @GeneratedValue
     @Column(name = "id")

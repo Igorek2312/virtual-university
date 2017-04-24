@@ -21,6 +21,13 @@ public class SubjectInstance {
     private Subject subject;
     private Group group;
 
+    public SubjectInstance() {
+    }
+
+    public SubjectInstance(Integer id) {
+        this.id = id;
+    }
+
     @Id
     @GeneratedValue
     @Column(name = "id")

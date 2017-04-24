@@ -3,10 +3,10 @@ package ua.km.khnu.virtual.university.transfare;
 /**
  * @author Igor Rybak
  */
-public class SpecialtyForm {
+public class SubjectForm {
     private String name;
 
-    private int facultyId;
+    private String department;
 
     public String getName() {
         return name;
@@ -16,11 +16,11 @@ public class SpecialtyForm {
         this.name = name;
     }
 
-    public int getFacultyId() {
-        return facultyId;
+    public String getDepartment() {
+        return department;
     }
 
-    public void setFacultyId(int facultyId) {
-        this.facultyId = facultyId;
+    public void setDepartment(String department) {
+        this.department = department;
     }
 }

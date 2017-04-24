@@ -17,6 +17,12 @@ public class Group {
     private Specialty specialty;
     private Collection<Student> students;
 
+    public Group() {
+    }
+
+    public Group(Integer id) {
+        this.id = id;
+    }
 
     @Id
     @GeneratedValue

@@ -6,20 +6,23 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import ua.km.khnu.virtual.university.error.NoAccountWithSuchDocumentNumber;
 import ua.km.khnu.virtual.university.model.Account;
 import ua.km.khnu.virtual.university.model.Group;
 import ua.km.khnu.virtual.university.model.Role;
 import ua.km.khnu.virtual.university.model.Student;
-import ua.km.khnu.virtual.university.repository.AccountRepository;
-import ua.km.khnu.virtual.university.repository.GroupRepository;
-import ua.km.khnu.virtual.university.repository.RoleRepository;
-import ua.km.khnu.virtual.university.repository.StudentRepository;
+import ua.km.khnu.virtual.university.repositories.AccountRepository;
+import ua.km.khnu.virtual.university.repositories.GroupRepository;
+import ua.km.khnu.virtual.university.repositories.RoleRepository;
+import ua.km.khnu.virtual.university.repositories.StudentRepository;
 import ua.km.khnu.virtual.university.transfare.CreateStudentForm;
+import ua.km.khnu.virtual.university.transfare.EnableStudentForm;
 
-import static ua.km.khnu.virtual.university.util.EntityUtils.*;
+import static ua.km.khnu.virtual.university.util.EntityUtils.retrieveOneOrThrowNotFound;
+import static ua.km.khnu.virtual.university.util.EntityUtils.throwNotFoundIfNotExists;
 
 /**
- * @author igorek2312
+ * @author Igor Rybak
  */
 @Service
 @Transactional
@@ -45,32 +48,19 @@ public class StudentServiceImpl implements StudentService {
         this.modelMapper = modelMapper;
     }
 
-    private Account mapToAccount(CreateStudentForm form) {
-        Account account = modelMapper.map(form, Account.class);
-        account.setId(null);
-        return account;
-    }
-
-    private Student mapToStudent(CreateStudentForm form) {
-        Student student = modelMapper.map(form, Student.class);
-        student.setId(null);
-        return student;
-    }
-
     @Override
     public Student create(CreateStudentForm form) {
         throwNotFoundIfNotExists(groupRepository::exists, form.getGroupId(), Group.class);
-        Group group = groupRepository.getOne(form.getGroupId());
 
         Role role = roleRepository.findByName("ROLE_STUDENT");
-        Account account = mapToAccount(form);
+        Account account = modelMapper.map(form, Account.class);
         account.getRoles().add(role);
         account.setEnabled(false);
         accountRepository.save(account);
 
-        Student student = mapToStudent(form);
+        Student student = modelMapper.map(form, Student.class);
         student.setAccount(account);
-        student.setGroup(group);
+        student.setGroup(new Group(form.getGroupId()));
         studentRepository.save(student);
 
         return student;
@@ -84,6 +74,12 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public Page<Student> getByGroup(int groupId, Pageable pageable) {
         return studentRepository.findByGroupId(groupId, pageable);
+    }
+
+    @Override
+    public Student getByDocumentNumber(String documentNumber) {
+        return studentRepository.findByAccountDocumentNumber(documentNumber)
+                .orElseThrow(NoAccountWithSuchDocumentNumber::new);
     }
 
     @Override
@@ -103,5 +99,19 @@ public class StudentServiceImpl implements StudentService {
     public void delete(int studentId) {
         throwNotFoundIfNotExists(studentRepository::exists, studentId, Student.class);
         studentRepository.delete(studentId);
+    }
+
+    @Override
+    public Student enableStudent(int studentId, EnableStudentForm form) {
+        Student student = retrieveOneOrThrowNotFound(studentRepository::findOne, studentId, Student.class);
+        Account account = student.getAccount();
+        if (account.getDocumentNumber().equals(form.getDocumentNumber())) {
+            account.setEnabled(form.isEnabled());
+            studentRepository.save(student);
+        } else {
+            throw new NoAccountWithSuchDocumentNumber();
+        }
+
+        return student;
     }
 }

@@ -13,6 +13,13 @@ public class Classroom {
     private Integer id;
     private String name;
 
+    public Classroom() {
+    }
+
+    public Classroom(Integer id) {
+        this.id = id;
+    }
+
     @Id
     @GeneratedValue
     @Column(name = "id")

@@ -17,7 +17,6 @@ import ua.km.khnu.virtual.university.transfare.LoginForm;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;

@@ -14,6 +14,13 @@ public class PeriodInstance {
     private LocalDate date;
     private Period period;
 
+    public PeriodInstance() {
+    }
+
+    public PeriodInstance(Integer id) {
+        this.id = id;
+    }
+
     @Id
     @GeneratedValue
     @Column(name = "id")

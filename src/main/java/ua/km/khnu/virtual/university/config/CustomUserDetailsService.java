@@ -7,7 +7,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import ua.km.khnu.virtual.university.model.Account;
-import ua.km.khnu.virtual.university.repository.AccountRepository;
+import ua.km.khnu.virtual.university.repositories.AccountRepository;
 
 import java.util.Collection;
 

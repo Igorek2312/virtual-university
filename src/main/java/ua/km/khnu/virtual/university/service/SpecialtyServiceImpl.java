@@ -7,9 +7,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ua.km.khnu.virtual.university.model.Faculty;
 import ua.km.khnu.virtual.university.model.Specialty;
-import ua.km.khnu.virtual.university.repository.FacultyRepository;
-import ua.km.khnu.virtual.university.repository.SpecialtyRepository;
-import ua.km.khnu.virtual.university.transfare.SpecialtyForm;
+import ua.km.khnu.virtual.university.repositories.FacultyRepository;
+import ua.km.khnu.virtual.university.repositories.SpecialtyRepository;
+import ua.km.khnu.virtual.university.transfare.CreateSpecialtyForm;
 
 import static ua.km.khnu.virtual.university.util.EntityUtils.retrieveOneOrThrowNotFound;
 import static ua.km.khnu.virtual.university.util.EntityUtils.throwNotFoundIfNotExists;
@@ -30,12 +30,11 @@ public class SpecialtyServiceImpl implements SpecialtyService {
     }
 
     @Override
-    public Specialty create(SpecialtyForm form) {
+    public Specialty create(CreateSpecialtyForm form) {
         throwNotFoundIfNotExists(facultyRepository::exists, form.getFacultyId(), Faculty.class);
-        Faculty faculty = facultyRepository.getOne(form.getFacultyId());
 
         Specialty specialty = new Specialty();
-        specialty.setFaculty(faculty);
+        specialty.setFaculty(new Faculty(form.getFacultyId()));
         specialty.setName(form.getName());
         specialtyRepository.save(specialty);
         return specialty;
@@ -52,7 +51,7 @@ public class SpecialtyServiceImpl implements SpecialtyService {
     }
 
     @Override
-    public Specialty update(SpecialtyForm form, int id) {
+    public Specialty update(CreateSpecialtyForm form, int id) {
         Specialty specialty = retrieveOneOrThrowNotFound(specialtyRepository::findOne, id, Specialty.class);
         specialty.setName(form.getName());
         specialtyRepository.save(specialty);

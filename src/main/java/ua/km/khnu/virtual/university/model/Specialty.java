@@ -13,6 +13,13 @@ public class Specialty {
     private String name;
     private Faculty faculty;
 
+    public Specialty() {
+    }
+
+    public Specialty(Integer id) {
+        this.id = id;
+    }
+
     @Id
     @GeneratedValue
     @Column(name = "id")

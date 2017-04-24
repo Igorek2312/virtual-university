@@ -10,7 +10,7 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import ua.km.khnu.virtual.university.error.NoEntityWithSuchIdCustomException;
 import ua.km.khnu.virtual.university.model.Faculty;
-import ua.km.khnu.virtual.university.repository.FacultyRepository;
+import ua.km.khnu.virtual.university.repositories.FacultyRepository;
 import ua.km.khnu.virtual.university.transfare.FacultyForm;
 
 import java.util.Arrays;

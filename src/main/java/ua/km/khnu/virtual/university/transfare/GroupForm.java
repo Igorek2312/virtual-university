@@ -3,7 +3,7 @@ package ua.km.khnu.virtual.university.transfare;
 import java.time.Year;
 
 /**
- * @author igorek2312
+ * @author Igor Rybak
  */
 public class GroupForm {
     private String name;

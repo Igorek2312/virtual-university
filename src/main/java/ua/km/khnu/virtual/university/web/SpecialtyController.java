@@ -8,10 +8,10 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import ua.km.khnu.virtual.university.model.Specialty;
 import ua.km.khnu.virtual.university.service.SpecialtyService;
-import ua.km.khnu.virtual.university.transfare.SpecialtyForm;
+import ua.km.khnu.virtual.university.transfare.CreateSpecialtyForm;
 
 /**
- * @author igorek2312
+ * @author Igor Rybak
  */
 @RestController
 @RequestMapping("/")
@@ -26,7 +26,7 @@ public class SpecialtyController {
     @PostMapping("/specialties")
     @ResponseStatus(HttpStatus.CREATED)
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    public Specialty create(@RequestBody SpecialtyForm form) {
+    public Specialty create(@RequestBody CreateSpecialtyForm form) {
         return specialtyService.create(form);
     }
 
@@ -47,7 +47,7 @@ public class SpecialtyController {
 
     @PutMapping("/specialties/{specialtyId}")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    public Specialty update(@PathVariable int specialtyId, @RequestBody SpecialtyForm form) {
+    public Specialty update(@PathVariable int specialtyId, @RequestBody CreateSpecialtyForm form) {
         return specialtyService.update(form, specialtyId);
     }
 
