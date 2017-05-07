@@ -1,5 +1,6 @@
 package ua.km.khnu.virtual.university.service;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,10 +18,12 @@ import static ua.km.khnu.virtual.university.util.EntityUtils.retrieveOneOrThrowN
 @Transactional
 public class AccountServiceImpl implements AccountService {
     private AccountRepository accountRepository;
+    private final ModelMapper modelMapper;
 
     @Autowired
-    public AccountServiceImpl(AccountRepository accountRepository) {
+    public AccountServiceImpl(AccountRepository accountRepository, ModelMapper modelMapper) {
         this.accountRepository = accountRepository;
+        this.modelMapper = modelMapper;
     }
 
     @Override
@@ -33,7 +36,8 @@ public class AccountServiceImpl implements AccountService {
     public Account enableAccount(int accountId, EnableAccountForm form) {
         Account account = retrieveOneOrThrowNotFound(accountRepository::findOne, accountId, Account.class);
         if (account.getDocumentNumber().equals(form.getDocumentNumber())) {
-            account.setEnabled(form.isEnabled());
+            modelMapper.map(form, account);
+            accountRepository.save(account);
         } else {
             throw new NoAccountWithSuchDocumentNumber();
         }
