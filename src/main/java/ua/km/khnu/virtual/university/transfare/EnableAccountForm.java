@@ -3,7 +3,7 @@ package ua.km.khnu.virtual.university.transfare;
 /**
  * @author Igor Rybak
  */
-public class EnableStudentForm {
+public class EnableAccountForm {
     private String documentNumber;
 
     private boolean enabled;

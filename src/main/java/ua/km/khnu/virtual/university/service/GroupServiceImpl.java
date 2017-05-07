@@ -1,5 +1,6 @@
 package ua.km.khnu.virtual.university.service;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -11,6 +12,8 @@ import ua.km.khnu.virtual.university.repositories.GroupRepository;
 import ua.km.khnu.virtual.university.repositories.SpecialtyRepository;
 import ua.km.khnu.virtual.university.transfare.GroupForm;
 
+import java.time.Year;
+
 import static ua.km.khnu.virtual.university.util.EntityUtils.retrieveOneOrThrowNotFound;
 import static ua.km.khnu.virtual.university.util.EntityUtils.throwNotFoundIfNotExists;
 
@@ -21,16 +24,24 @@ import static ua.km.khnu.virtual.university.util.EntityUtils.throwNotFoundIfNotE
 @Transactional
 public class GroupServiceImpl implements GroupService {
     private GroupRepository groupRepository;
-
     private SpecialtyRepository specialtyRepository;
+    private ModelMapper modelMapper;
 
     @Autowired
     public GroupServiceImpl(
             GroupRepository groupRepository,
-            SpecialtyRepository specialtyRepository
+            SpecialtyRepository specialtyRepository,
+            ModelMapper modelMapper
     ) {
         this.groupRepository = groupRepository;
         this.specialtyRepository = specialtyRepository;
+        this.modelMapper = modelMapper;
+    }
+
+    private Group mapToGroup(GroupForm groupForm) {
+        Group group = modelMapper.map(groupForm, Group.class);
+        group.setYearEntered(Year.of(groupForm.getYearEntered()));
+        return group;
     }
 
     @Override
@@ -40,9 +51,7 @@ public class GroupServiceImpl implements GroupService {
                 groupForm.getSpecialtyId(),
                 Specialty.class
         );
-
-        Group group = new Group();
-        group.setName(groupForm.getName());
+        Group group = mapToGroup(groupForm);
         group.setSpecialty(new Specialty(groupForm.getSpecialtyId()));
         groupRepository.save(group);
         return group;

@@ -13,7 +13,6 @@ public class CreatePeriodForm {
     private int classroomId;
     private int teacherSubjectInstanceId;
 
-
     public DayOfWeek getDayOfWeek() {
         return dayOfWeek;
     }

@@ -16,7 +16,7 @@ import ua.km.khnu.virtual.university.repositories.GroupRepository;
 import ua.km.khnu.virtual.university.repositories.RoleRepository;
 import ua.km.khnu.virtual.university.repositories.StudentRepository;
 import ua.km.khnu.virtual.university.transfare.CreateStudentForm;
-import ua.km.khnu.virtual.university.transfare.EnableStudentForm;
+import ua.km.khnu.virtual.university.transfare.EnableAccountForm;
 
 import static ua.km.khnu.virtual.university.util.EntityUtils.retrieveOneOrThrowNotFound;
 import static ua.km.khnu.virtual.university.util.EntityUtils.throwNotFoundIfNotExists;
@@ -77,12 +77,6 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public Student getByDocumentNumber(String documentNumber) {
-        return studentRepository.findByAccountDocumentNumber(documentNumber)
-                .orElseThrow(NoAccountWithSuchDocumentNumber::new);
-    }
-
-    @Override
     public Student update(int studentId, CreateStudentForm form) {
         Student student = retrieveOneOrThrowNotFound(
                 studentRepository::findOne,
@@ -101,17 +95,4 @@ public class StudentServiceImpl implements StudentService {
         studentRepository.delete(studentId);
     }
 
-    @Override
-    public Student enableStudent(int studentId, EnableStudentForm form) {
-        Student student = retrieveOneOrThrowNotFound(studentRepository::findOne, studentId, Student.class);
-        Account account = student.getAccount();
-        if (account.getDocumentNumber().equals(form.getDocumentNumber())) {
-            account.setEnabled(form.isEnabled());
-            studentRepository.save(student);
-        } else {
-            throw new NoAccountWithSuchDocumentNumber();
-        }
-
-        return student;
-    }
 }

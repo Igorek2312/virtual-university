@@ -26,7 +26,7 @@ public class SubjectInstanceController {
     @PostMapping("/subject-instances")
     @ResponseStatus(HttpStatus.CREATED)
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    public SubjectInstance create(CreateSubjectInstanceForm form) {
+    public SubjectInstance create(@RequestBody CreateSubjectInstanceForm form) {
         return subjectInstanceService.create(form);
     }
 

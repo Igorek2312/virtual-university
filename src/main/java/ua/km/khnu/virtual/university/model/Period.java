@@ -1,5 +1,7 @@
 package ua.km.khnu.virtual.university.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.time.DayOfWeek;
 
@@ -72,6 +74,7 @@ public class Period {
 
     @ManyToOne
     @JoinColumn(name = "classroom_id", referencedColumnName = "id", nullable = false)
+    @JsonIgnore
     public Classroom getClassroom() {
         return classroom;
     }

@@ -1,5 +1,7 @@
 package ua.km.khnu.virtual.university.transfare;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.time.Year;
 
 /**
@@ -8,7 +10,7 @@ import java.time.Year;
 public class GroupForm {
     private String name;
 
-    private Year yearEntered;
+    private int yearEntered;
 
     private int yearOfStudyEntered;
 
@@ -22,11 +24,11 @@ public class GroupForm {
         this.name = name;
     }
 
-    public Year getYearEntered() {
+    public int getYearEntered() {
         return yearEntered;
     }
 
-    public void setYearEntered(Year yearEntered) {
+    public void setYearEntered(int yearEntered) {
         this.yearEntered = yearEntered;
     }
 

@@ -1,5 +1,7 @@
 package ua.km.khnu.virtual.university.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
 /**
@@ -33,6 +35,7 @@ public class Grade {
 
     @ManyToOne
     @JoinColumn(name = "period_instance_id", referencedColumnName = "id", nullable = false)
+    @JsonIgnore
     public PeriodInstance getPeriodInstance() {
         return periodInstance;
     }

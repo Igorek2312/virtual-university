@@ -1,5 +1,7 @@
 package ua.km.khnu.virtual.university.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 
@@ -52,6 +54,7 @@ public class PeriodInstance {
 
     @ManyToOne
     @JoinColumn(name = "period_id", referencedColumnName = "id", nullable = false)
+    @JsonIgnore
     public Period getPeriod() {
         return period;
     }

@@ -8,11 +8,16 @@ import org.modelmapper.Condition;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.spi.MappingContext;
 import ua.km.khnu.virtual.university.config.GeneralConfiguration;
+import ua.km.khnu.virtual.university.model.Group;
 import ua.km.khnu.virtual.university.model.Specialty;
 import ua.km.khnu.virtual.university.transfare.CreateSpecialtyForm;
+import ua.km.khnu.virtual.university.transfare.GroupForm;
+
+import java.time.Year;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertThat;
 
 /**
  * @author igorek2312
@@ -36,7 +41,6 @@ public class ModelMapperTest {
         Specialty specialty = modelMapper.map(form, Specialty.class);
         assertEquals("foo", specialty.getName());
         assertNull(specialty.getId());
-
     }
 }
 

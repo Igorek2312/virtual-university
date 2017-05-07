@@ -11,7 +11,7 @@ public class CreateSubjectInstanceForm {
     private String subjectType;
     private LocalDate dateBegin;
     private LocalDate dateEnd;
-    private Duration hours;
+    private int hours;
     private int subjectId;
     private int groupId;
 
@@ -47,11 +47,11 @@ public class CreateSubjectInstanceForm {
         this.dateEnd = dateEnd;
     }
 
-    public Duration getHours() {
+    public int getHours() {
         return hours;
     }
 
-    public void setHours(Duration hours) {
+    public void setHours(int hours) {
         this.hours = hours;
     }
 

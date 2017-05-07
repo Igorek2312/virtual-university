@@ -1,5 +1,7 @@
 package ua.km.khnu.virtual.university.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.time.Year;
 import java.util.Collection;
@@ -65,6 +67,7 @@ public class Group {
 
     @ManyToOne
     @JoinColumn(name = "specialty_id", referencedColumnName = "id", nullable = false)
+    @JsonIgnore
     public Specialty getSpecialty() {
         return specialty;
     }
@@ -74,6 +77,7 @@ public class Group {
     }
 
      @OneToMany(mappedBy = "group")
+     @JsonIgnore
      public Collection<Student> getStudents() {
          return students;
      }
