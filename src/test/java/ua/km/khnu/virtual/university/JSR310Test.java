@@ -1,12 +1,9 @@
 package ua.km.khnu.virtual.university;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
-import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
 import ua.km.khnu.virtual.university.transfare.CreateSubjectInstanceForm;
 
 import java.time.LocalDate;

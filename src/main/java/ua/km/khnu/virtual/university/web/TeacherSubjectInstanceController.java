@@ -22,7 +22,7 @@ public class TeacherSubjectInstanceController {
     }
 
     @PostMapping("/teacher-subject-instances")
-    public TeacherSubjectInstance create(CreateTeacherSubjectInstanceForm form) {
+    public TeacherSubjectInstance create(@RequestBody CreateTeacherSubjectInstanceForm form) {
         return teacherSubjectInstanceService.create(form);
     }
 
