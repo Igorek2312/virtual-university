@@ -57,11 +57,6 @@ public class TeacherServiceImpl implements TeacherService {
     }
 
     @Override
-    public Teacher getByDocument(String documentNumber) {
-        return null;
-    }
-
-    @Override
     public Teacher update(int teacherId, TeacherForm form) {
         Teacher teacher = retrieveOneOrThrowNotFound(
                 teacherRepository::findOne,

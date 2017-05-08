@@ -17,5 +17,4 @@ public interface TeacherService {
 
     void delete(int teacherId);
 
-    Teacher getByDocument(String documentNumber);
 }

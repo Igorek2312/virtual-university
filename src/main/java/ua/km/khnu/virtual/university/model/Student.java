@@ -35,7 +35,7 @@ public class Student {
         this.financeType = financeType;
     }
 
-    @Column(name = "record_book_number")
+    @Column(name = "record_book_number", nullable = false, unique = true)
     public String getRecordBookNumber() {
         return recordBookNumber;
     }

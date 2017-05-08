@@ -6,7 +6,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ua.km.khnu.virtual.university.error.NoAccountWithSuchDocumentNumber;
 import ua.km.khnu.virtual.university.model.Account;
 import ua.km.khnu.virtual.university.model.Group;
 import ua.km.khnu.virtual.university.model.Role;
@@ -16,7 +15,6 @@ import ua.km.khnu.virtual.university.repositories.GroupRepository;
 import ua.km.khnu.virtual.university.repositories.RoleRepository;
 import ua.km.khnu.virtual.university.repositories.StudentRepository;
 import ua.km.khnu.virtual.university.transfare.CreateStudentForm;
-import ua.km.khnu.virtual.university.transfare.EnableAccountForm;
 
 import static ua.km.khnu.virtual.university.util.EntityUtils.retrieveOneOrThrowNotFound;
 import static ua.km.khnu.virtual.university.util.EntityUtils.throwNotFoundIfNotExists;
@@ -93,6 +91,11 @@ public class StudentServiceImpl implements StudentService {
     public void delete(int studentId) {
         throwNotFoundIfNotExists(studentRepository::exists, studentId, Student.class);
         studentRepository.delete(studentId);
+    }
+
+    @Override
+    public Page<Student> getByGroupName(String groupName, Pageable pageable) {
+        return studentRepository.findByGroupName(groupName,pageable);
     }
 
 }

@@ -32,8 +32,12 @@ public class StudentController {
 
     @GetMapping("/students")
     public Page<Student> getByDocumentNumber(
+            @RequestParam(value = "group-name", required = false) String groupName,
             Pageable pageable
     ) {
+        if (groupName!=null){
+           return studentService.getByGroupName(groupName, pageable);
+        }
         return studentService.getAll(pageable);
     }
 

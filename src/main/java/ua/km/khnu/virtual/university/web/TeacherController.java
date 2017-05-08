@@ -33,17 +33,8 @@ public class TeacherController {
     }
 
     @GetMapping("/teachers")
-    public ResponseEntity<Object> getAll(
-            @RequestParam(value="document-number",required = false) String documentNumber,
-            Pageable pageable
-    ) {
-        if (documentNumber!=null) {
-           Teacher teacher= teacherService.getByDocument(documentNumber);
-           return new ResponseEntity<>(teacher,HttpStatus.OK);
-        }
-
-        Page<Teacher> page = teacherService.getAll(pageable);
-        return new ResponseEntity<>(page,HttpStatus.OK);
+    public Page<Teacher> getAll(Pageable pageable) {
+        return teacherService.getAll(pageable);
     }
 
     @PutMapping("/teachers/{teacherId}")

@@ -4,7 +4,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import ua.km.khnu.virtual.university.model.Student;
 import ua.km.khnu.virtual.university.transfare.CreateStudentForm;
-import ua.km.khnu.virtual.university.transfare.EnableAccountForm;
 
 /**
  * @author Igor Rybak
@@ -19,4 +18,6 @@ public interface StudentService {
     Student update(int studentId, CreateStudentForm form);
 
     void delete(int studentId);
+
+    Page<Student> getByGroupName(String groupName, Pageable pageable);
 }

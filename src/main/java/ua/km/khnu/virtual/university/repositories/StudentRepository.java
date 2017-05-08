@@ -12,7 +12,6 @@ import java.util.Optional;
  */
 public interface StudentRepository extends JpaRepository<Student, Integer> {
     Page<Student> findByGroupId(int groupId, Pageable pageable);
-
-    Optional<Student> findByAccountDocumentNumber(String documentNumber);
+    Page<Student> findByGroupName(String groupName, Pageable pageable);
 }
 

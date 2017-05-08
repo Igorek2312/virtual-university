@@ -100,7 +100,7 @@ public class Account {
         this.roles = role;
     }
 
-    @Column(name = "document_number")
+    @Column(name = "document_number", unique = true)
     public String getDocumentNumber() {
         return documentNumber;
     }
