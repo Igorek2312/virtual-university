@@ -1,6 +1,5 @@
 package ua.km.khnu.virtual.university.transfare;
 
-import java.time.Duration;
 import java.time.LocalDate;
 
 /**

@@ -45,6 +45,7 @@ public class Role implements GrantedAuthority {
         this.accounts = roleSet;
     }
 
+    @JsonIgnore
     @Override
     public String getAuthority() {
         return name.toString();
