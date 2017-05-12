@@ -1,6 +1,5 @@
 package ua.km.khnu.virtual.university.transfare;
 
-import java.time.Duration;
 import java.time.LocalDate;
 
 /**
@@ -11,7 +10,7 @@ public class UpdateSubjectInstanceForm {
     private String subjectType;
     private LocalDate dateBegin;
     private LocalDate dateEnd;
-    private Duration hours;
+    private int hours;
 
     public String getControlType() {
         return controlType;
@@ -45,11 +44,11 @@ public class UpdateSubjectInstanceForm {
         this.dateEnd = dateEnd;
     }
 
-    public Duration getHours() {
+    public int getHours() {
         return hours;
     }
 
-    public void setHours(Duration hours) {
+    public void setHours(int hours) {
         this.hours = hours;
     }
 }

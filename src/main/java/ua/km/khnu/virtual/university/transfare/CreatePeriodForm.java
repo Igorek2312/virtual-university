@@ -1,5 +1,8 @@
 package ua.km.khnu.virtual.university.transfare;
 
+import org.hibernate.validator.constraints.Range;
+import ua.km.khnu.virtual.university.refrence.OddEvenWeek;
+
 import java.time.DayOfWeek;
 
 /**
@@ -7,9 +10,9 @@ import java.time.DayOfWeek;
  */
 public class CreatePeriodForm {
     private DayOfWeek dayOfWeek;
-    private String oddEven;
+    private OddEvenWeek oddEven;
+    @Range(min = 1, max = 10)
     private byte periodNumber;
-    private String defaultType;
     private int classroomId;
     private int teacherSubjectInstanceId;
 
@@ -21,11 +24,11 @@ public class CreatePeriodForm {
         this.dayOfWeek = dayOfWeek;
     }
 
-    public String getOddEven() {
+    public OddEvenWeek getOddEven() {
         return oddEven;
     }
 
-    public void setOddEven(String oddEven) {
+    public void setOddEven(OddEvenWeek oddEven) {
         this.oddEven = oddEven;
     }
 
@@ -35,14 +38,6 @@ public class CreatePeriodForm {
 
     public void setPeriodNumber(byte periodNumber) {
         this.periodNumber = periodNumber;
-    }
-
-    public String getDefaultType() {
-        return defaultType;
-    }
-
-    public void setDefaultType(String defaultType) {
-        this.defaultType = defaultType;
     }
 
     public int getClassroomId() {

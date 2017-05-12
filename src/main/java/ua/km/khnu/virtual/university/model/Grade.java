@@ -10,8 +10,10 @@ import javax.persistence.*;
 @Entity
 public class Grade {
     private Integer id;
-    private byte value;
+    private Byte value;
+    private boolean present;
     private PeriodInstance periodInstance;
+    private Student student;
 
     @Id
     @GeneratedValue
@@ -25,12 +27,21 @@ public class Grade {
     }
 
     @Column(name = "value")
-    public byte getValue() {
+    public Byte getValue() {
         return value;
     }
 
-    public void setValue(byte value) {
+    public void setValue(Byte value) {
         this.value = value;
+    }
+
+    @Column(name = "was_present", nullable = false)
+    public boolean isPresent() {
+        return present;
+    }
+
+    public void setPresent(boolean present) {
+        this.present = present;
     }
 
     @ManyToOne
@@ -42,5 +53,15 @@ public class Grade {
 
     public void setPeriodInstance(PeriodInstance periodInstance) {
         this.periodInstance = periodInstance;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "student_id", referencedColumnName = "id", nullable = false)
+    public Student getStudent() {
+        return student;
+    }
+
+    public void setStudent(Student student) {
+        this.student = student;
     }
 }

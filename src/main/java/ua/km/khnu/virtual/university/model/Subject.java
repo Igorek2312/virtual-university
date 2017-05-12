@@ -32,7 +32,7 @@ public class Subject {
         this.id = id;
     }
 
-    @Column(name = "name")
+    @Column(name = "name",nullable = false)
     public String getName() {
         return name;
     }
@@ -41,7 +41,7 @@ public class Subject {
         this.name = name;
     }
 
-    @Column(name = "department")
+    @Column(name = "department",nullable = false)
     public String getDepartment() {
         return department;
     }

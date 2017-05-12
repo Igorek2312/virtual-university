@@ -34,7 +34,7 @@ public class PeriodInstance {
         this.id = id;
     }
 
-    @Column(name = "type")
+    @Column(name = "type",nullable = false)
     public String getType() {
         return type;
     }
@@ -43,7 +43,7 @@ public class PeriodInstance {
         this.type = type;
     }
 
-    @Column(name = "date", columnDefinition = "DATE")
+    @Column(name = "date", columnDefinition = "DATE",nullable = false)
     public LocalDate getDate() {
         return date;
     }

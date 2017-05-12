@@ -1,0 +1,1 @@
+ALTER TABLE period DROP default_type;

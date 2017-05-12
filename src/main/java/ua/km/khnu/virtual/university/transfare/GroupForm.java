@@ -1,9 +1,5 @@
 package ua.km.khnu.virtual.university.transfare;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-
-import java.time.Year;
-
 /**
  * @author Igor Rybak
  */

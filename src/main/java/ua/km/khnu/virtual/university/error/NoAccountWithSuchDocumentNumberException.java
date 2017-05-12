@@ -5,7 +5,7 @@ import org.springframework.http.HttpStatus;
 /**
  * @author Igor Rybak
  */
-public class NoAccountWithSuchDocumentNumber extends CustomException {
+public class NoAccountWithSuchDocumentNumberException extends CustomException {
     @Override
     public int getCode() {
         return 1;

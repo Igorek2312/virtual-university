@@ -26,7 +26,7 @@ public class GradeController {
 
     @PostMapping("/grades")
     @ResponseStatus(HttpStatus.CREATED)
-    public Grade create(CreateGradeForm form) {
+    public Grade create(@RequestBody CreateGradeForm form) {
         return gradeService.create(form);
     }
 

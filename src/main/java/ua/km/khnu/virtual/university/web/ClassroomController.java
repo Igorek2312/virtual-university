@@ -25,7 +25,7 @@ public class ClassroomController {
     @PostMapping("/classrooms")
     @ResponseStatus(HttpStatus.CREATED)
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    public Classroom create(ClassroomForm form) {
+    public Classroom create(@RequestBody ClassroomForm form) {
         return classroomService.create(form);
     }
 

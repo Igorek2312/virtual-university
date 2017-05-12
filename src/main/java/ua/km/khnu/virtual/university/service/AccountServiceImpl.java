@@ -4,7 +4,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ua.km.khnu.virtual.university.error.NoAccountWithSuchDocumentNumber;
+import ua.km.khnu.virtual.university.error.NoAccountWithSuchDocumentNumberException;
 import ua.km.khnu.virtual.university.model.Account;
 import ua.km.khnu.virtual.university.repositories.AccountRepository;
 import ua.km.khnu.virtual.university.transfare.EnableAccountForm;
@@ -29,7 +29,7 @@ public class AccountServiceImpl implements AccountService {
     @Override
     public Account getByDocumentNumber(String documentNumber) {
         return accountRepository.findByDocumentNumber(documentNumber)
-                .orElseThrow(NoAccountWithSuchDocumentNumber::new);
+                .orElseThrow(NoAccountWithSuchDocumentNumberException::new);
     }
 
     @Override
@@ -39,7 +39,7 @@ public class AccountServiceImpl implements AccountService {
             modelMapper.map(form, account);
             accountRepository.save(account);
         } else {
-            throw new NoAccountWithSuchDocumentNumber();
+            throw new NoAccountWithSuchDocumentNumberException();
         }
 
         return account;

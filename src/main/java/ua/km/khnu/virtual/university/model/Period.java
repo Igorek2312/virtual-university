@@ -1,6 +1,7 @@
 package ua.km.khnu.virtual.university.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import ua.km.khnu.virtual.university.refrence.OddEvenWeek;
 
 import javax.persistence.*;
 import java.time.DayOfWeek;
@@ -12,9 +13,8 @@ import java.time.DayOfWeek;
 public class Period {
     private Integer id;
     private DayOfWeek dayOfWeek;
-    private String oddEven;
+    private OddEvenWeek oddEven;
     private byte periodNumber;
-    private String defaultType;
     private Classroom classroom;
     private TeacherSubjectInstance teacherSubjectInstance;
 
@@ -36,7 +36,7 @@ public class Period {
         this.id = id;
     }
 
-    @Column(name = "day_of_week", columnDefinition = "TINYINT")
+    @Column(name = "day_of_week", columnDefinition = "TINYINT",nullable = false)
     public DayOfWeek getDayOfWeek() {
         return dayOfWeek;
     }
@@ -45,31 +45,23 @@ public class Period {
         this.dayOfWeek = dayOfWeek;
     }
 
-    @Column(name = "odd_even")
-    public String getOddEven() {
+    @Column(name = "odd_even",nullable = false)
+    @Enumerated(EnumType.STRING)
+    public OddEvenWeek getOddEven() {
         return oddEven;
     }
 
-    public void setOddEven(String oddEven) {
+    public void setOddEven(OddEvenWeek oddEven) {
         this.oddEven = oddEven;
     }
 
-    @Column(name = "period_number")
+    @Column(name = "period_number",nullable = false)
     public byte getPeriodNumber() {
         return periodNumber;
     }
 
     public void setPeriodNumber(byte periodNumber) {
         this.periodNumber = periodNumber;
-    }
-
-    @Column(name = "default_type")
-    public String getDefaultType() {
-        return defaultType;
-    }
-
-    public void setDefaultType(String defaultType) {
-        this.defaultType = defaultType;
     }
 
     @ManyToOne

@@ -2,10 +2,12 @@ package ua.km.khnu.virtual.university.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.ParameterBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.schema.ModelRef;
+import springfox.documentation.service.ApiInfo;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
@@ -35,6 +37,14 @@ public class SwaggerConfiguration {
                                 .modelRef(new ModelRef("string"))
                                 .parameterType("header")
                                 .required(false)
-                                .build()));
+                                .build()))
+                .apiInfo(apiInfo());
+    }
+
+    private ApiInfo apiInfo() {
+        return new ApiInfoBuilder()
+                .title("серверний модуль API для додатку Хмельницький віртуальний університет")
+                .description("")
+                .build();
     }
 }

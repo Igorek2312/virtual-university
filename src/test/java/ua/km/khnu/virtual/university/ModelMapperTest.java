@@ -11,6 +11,7 @@ import ua.km.khnu.virtual.university.config.GeneralConfiguration;
 import ua.km.khnu.virtual.university.model.Group;
 import ua.km.khnu.virtual.university.model.Specialty;
 import ua.km.khnu.virtual.university.model.SubjectInstance;
+import ua.km.khnu.virtual.university.refrence.OddEvenWeek;
 import ua.km.khnu.virtual.university.transfare.CreateSpecialtyForm;
 import ua.km.khnu.virtual.university.transfare.CreateSubjectInstanceForm;
 import ua.km.khnu.virtual.university.transfare.GroupForm;
@@ -59,5 +60,6 @@ public class ModelMapperTest {
         assertEquals("foo1", subjectInstance.getControlType());
         assertEquals(LocalDate.of(2017, 2, 6), subjectInstance.getDateBegin());
     }
+
 }
 

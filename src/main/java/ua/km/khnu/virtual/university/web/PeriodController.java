@@ -10,6 +10,8 @@ import ua.km.khnu.virtual.university.service.PeriodService;
 import ua.km.khnu.virtual.university.transfare.CreatePeriodForm;
 import ua.km.khnu.virtual.university.transfare.UpdatePeriodForm;
 
+import javax.validation.Valid;
+
 /**
  * @author Igor Rybak
  */
@@ -24,7 +26,7 @@ public class PeriodController {
 
     @PostMapping("/periods")
     @ResponseStatus(HttpStatus.CREATED)
-    public Period create(CreatePeriodForm form) {
+    public Period create(@Valid @RequestBody CreatePeriodForm form) {
         return periodService.create(form);
     }
 

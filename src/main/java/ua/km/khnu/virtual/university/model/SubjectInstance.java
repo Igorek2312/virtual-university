@@ -1,9 +1,6 @@
 package ua.km.khnu.virtual.university.model;
 
-import ua.km.khnu.virtual.university.model.converters.HoursDurationConverter;
-
 import javax.persistence.*;
-import java.time.Duration;
 import java.time.LocalDate;
 
 /**
@@ -17,7 +14,7 @@ public class SubjectInstance {
     private String subjectType;
     private LocalDate dateBegin;
     private LocalDate dateEnd;
-    private Duration hours;
+    private int hours;
     private Subject subject;
     private Group group;
 
@@ -39,7 +36,7 @@ public class SubjectInstance {
         this.id = id;
     }
 
-    @Column(name = "control_type")
+    @Column(name = "control_type",nullable = false)
     public String getControlType() {
         return controlType;
     }
@@ -48,7 +45,7 @@ public class SubjectInstance {
         this.controlType = controllType;
     }
 
-    @Column(name = "subject_type")
+    @Column(name = "subject_type",nullable = false)
     public String getSubjectType() {
         return subjectType;
     }
@@ -57,7 +54,7 @@ public class SubjectInstance {
         this.subjectType = subjectType;
     }
 
-    @Column(name = "date_begin", columnDefinition = "DATE")
+    @Column(name = "date_begin", columnDefinition = "DATE", nullable = false)
     public LocalDate getDateBegin() {
         return dateBegin;
     }
@@ -66,7 +63,7 @@ public class SubjectInstance {
         this.dateBegin = dateStart;
     }
 
-    @Column(name = "date_end", columnDefinition = "DATE")
+    @Column(name = "date_end", columnDefinition = "DATE", nullable = false)
     public LocalDate getDateEnd() {
         return dateEnd;
     }
@@ -75,13 +72,12 @@ public class SubjectInstance {
         this.dateEnd = dateFinish;
     }
 
-    @Column(name = "hours")
-    @Convert(converter = HoursDurationConverter.class)
-    public Duration getHours() {
+    @Column(name = "hours",nullable = false)
+    public int getHours() {
         return hours;
     }
 
-    public void setHours(Duration hours) {
+    public void setHours(int hours) {
         this.hours = hours;
     }
 

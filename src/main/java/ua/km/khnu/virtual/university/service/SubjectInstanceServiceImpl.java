@@ -15,8 +15,6 @@ import ua.km.khnu.virtual.university.repositories.SubjectRepository;
 import ua.km.khnu.virtual.university.transfare.CreateSubjectInstanceForm;
 import ua.km.khnu.virtual.university.transfare.UpdateSubjectInstanceForm;
 
-import java.time.Duration;
-
 import static ua.km.khnu.virtual.university.util.EntityUtils.retrieveOneOrThrowNotFound;
 import static ua.km.khnu.virtual.university.util.EntityUtils.throwNotFoundIfNotExists;
 
@@ -44,15 +42,9 @@ public class SubjectInstanceServiceImpl implements SubjectInstanceService {
         this.modelMapper = modelMapper;
     }
 
-    private SubjectInstance mapSubjectInstance(CreateSubjectInstanceForm form) {
-        SubjectInstance subjectInstance = modelMapper.map(form, SubjectInstance.class);
-        subjectInstance.setHours(Duration.ofHours(form.getHours()));
-        return subjectInstance;
-    }
-
     @Override
     public SubjectInstance create(CreateSubjectInstanceForm form) {
-        SubjectInstance subjectInstance = mapSubjectInstance(form);
+        SubjectInstance subjectInstance = modelMapper.map(form, SubjectInstance.class);
         throwNotFoundIfNotExists(subjectRepository::exists, form.getSubjectId(), Subject.class);
         throwNotFoundIfNotExists(groupRepository::exists, form.getGroupId(), Group.class);
         Subject subject = new Subject(form.getSubjectId());

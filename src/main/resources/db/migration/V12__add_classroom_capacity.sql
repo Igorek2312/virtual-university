@@ -1,0 +1,1 @@
+ALTER TABLE classroom ADD capacity INT NOT NULL;

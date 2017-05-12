@@ -12,6 +12,7 @@ import javax.persistence.Id;
 public class Classroom {
     private Integer id;
     private String name;
+    private int capacity;
 
     public Classroom() {
     }
@@ -31,12 +32,21 @@ public class Classroom {
         this.id = id;
     }
 
-    @Column(name = "name")
+    @Column(name = "name", nullable = false)
     public String getName() {
         return name;
     }
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    @Column(name = "capacity", nullable = false)
+    public int getCapacity() {
+        return capacity;
+    }
+
+    public void setCapacity(int capacity) {
+        this.capacity = capacity;
     }
 }

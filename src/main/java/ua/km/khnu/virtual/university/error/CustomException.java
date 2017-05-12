@@ -13,6 +13,20 @@ import java.util.Optional;
 public abstract class CustomException extends RuntimeException {
     private Object[] descriptionArgs;
     private Object[] messageArgs = null;
+    private String description;
+    private String messageKey;
+
+    public CustomException() {
+    }
+
+    public CustomException(String description) {
+        this.description = description;
+    }
+
+    public CustomException(String description, String messageKey) {
+        this.description = description;
+        this.messageKey = messageKey;
+    }
 
     /**
      * @return formatted description with argument
@@ -52,13 +66,15 @@ public abstract class CustomException extends RuntimeException {
      * @return message key to retrieve from {@code MessageSource}
      */
     public Optional<String> getMessageKey() {
-        return Optional.empty();
+        return Optional.ofNullable(messageKey);
     }
 
     /**
      * @return description of exception
      */
-    public abstract String getDescription();
+    public String getDescription() {
+        return description;
+    }
 
     /**
      * @return appropriate HTTP status code

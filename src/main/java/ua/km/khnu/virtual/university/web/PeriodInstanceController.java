@@ -28,6 +28,12 @@ public class PeriodInstanceController {
         return periodInstanceService.create(form);
     }
 
+    @PostMapping("periods/{periodId}/period-instances")
+    @ResponseStatus(HttpStatus.CREATED)
+    public void createAll(@PathVariable int periodId) {
+       periodInstanceService.createAll(periodId);
+    }
+
     @GetMapping("/period-instances")
     public Page<PeriodInstance> getAll(Pageable pageable) {
         return periodInstanceService.getAll(pageable);
@@ -46,4 +52,11 @@ public class PeriodInstanceController {
     public void delete(@PathVariable int periodInstanceId) {
         periodInstanceService.delete(periodInstanceId);
     }
+
+    @DeleteMapping("/periods/{periodId}/period-instances")
+    @ResponseStatus(HttpStatus.CREATED)
+    public void deleteAll(@PathVariable int periodId) {
+        periodInstanceService.deleteAll(periodId);
+    }
+
 }

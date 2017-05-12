@@ -18,4 +18,7 @@ public interface PeriodInstanceService {
 
     void delete(int periodInstanceId);
 
+    void createAll(int periodId);
+
+    void deleteAll(int periodId);
 }

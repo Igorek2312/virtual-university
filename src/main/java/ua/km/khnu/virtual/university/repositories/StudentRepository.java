@@ -5,8 +5,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import ua.km.khnu.virtual.university.model.Student;
 
-import java.util.Optional;
-
 /**
  * @author Igor Rybak
  */

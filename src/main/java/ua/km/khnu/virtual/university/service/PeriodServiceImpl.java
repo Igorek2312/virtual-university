@@ -44,8 +44,8 @@ public class PeriodServiceImpl implements PeriodService {
 
     @Override
     public Period create(CreatePeriodForm form) {
-        throwNotFoundIfNotExists(
-                teacherSubjectInstanceRepository::exists,
+        TeacherSubjectInstance teacherSubjectInstance = retrieveOneOrThrowNotFound(
+                teacherSubjectInstanceRepository::findOne,
                 form.getTeacherSubjectInstanceId(),
                 TeacherSubjectInstance.class
         );
@@ -55,11 +55,11 @@ public class PeriodServiceImpl implements PeriodService {
                 Classroom.class
         );
 
-        TeacherSubjectInstance teacherSubjectInstance = new TeacherSubjectInstance(form.getTeacherSubjectInstanceId());
         Classroom classroom = new Classroom(form.getClassroomId());
         Period period = modelMapper.map(form, Period.class);
         period.setClassroom(classroom);
         period.setTeacherSubjectInstance(teacherSubjectInstance);
+
         return periodRepository.save(period);
     }
 

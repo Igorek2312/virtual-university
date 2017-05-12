@@ -8,8 +8,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ua.km.khnu.virtual.university.model.Grade;
 import ua.km.khnu.virtual.university.model.PeriodInstance;
+import ua.km.khnu.virtual.university.model.Student;
 import ua.km.khnu.virtual.university.repositories.GradeRepository;
 import ua.km.khnu.virtual.university.repositories.PeriodInstanceRepository;
+import ua.km.khnu.virtual.university.repositories.StudentRepository;
 import ua.km.khnu.virtual.university.transfare.CreateGradeForm;
 import ua.km.khnu.virtual.university.transfare.UpdateGradeForm;
 
@@ -26,29 +28,38 @@ import static ua.km.khnu.virtual.university.util.EntityUtils.throwNotFoundIfNotE
 public class GradeServiceImpl implements GradeService {
     private GradeRepository gradeRepository;
     private PeriodInstanceRepository periodInstanceRepository;
+    private final StudentRepository studentRepository;
     private ModelMapper modelMapper;
 
     @Autowired
     public GradeServiceImpl(
             GradeRepository gradeRepository,
             PeriodInstanceRepository periodInstanceRepository,
-            ModelMapper modelMapper
+            ModelMapper modelMapper,
+            StudentRepository studentRepository
     ) {
         this.gradeRepository = gradeRepository;
         this.periodInstanceRepository = periodInstanceRepository;
         this.modelMapper = modelMapper;
+        this.studentRepository = studentRepository;
     }
 
     @Override
     public Grade create(CreateGradeForm form) {
         throwNotFoundIfNotExists(
-                gradeRepository::exists,
+                periodInstanceRepository::exists,
                 form.getPeriodInstanceId(),
                 Grade.class
         );
+        throwNotFoundIfNotExists(
+                studentRepository::exists,
+                form.getStudentId(),
+                Student.class
+        );
         Grade grade = modelMapper.map(form, Grade.class);
         grade.setPeriodInstance(new PeriodInstance(form.getPeriodInstanceId()));
-        return grade;
+        grade.setStudent(new Student(form.getStudentId()));
+        return gradeRepository.save(grade);
     }
 
     @Override
@@ -69,6 +80,7 @@ public class GradeServiceImpl implements GradeService {
                 Grade.class
         );
         modelMapper.map(form, grade);
+        gradeRepository.save(grade);
         return grade;
     }
 }

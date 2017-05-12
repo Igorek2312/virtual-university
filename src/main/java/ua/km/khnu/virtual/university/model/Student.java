@@ -15,6 +15,13 @@ public class Student {
     private Group group;
     private Account account;
 
+    public Student() {
+    }
+
+    public Student(int studentId) {
+        this.id=studentId;
+    }
+
     @Id
     @GeneratedValue
     @Column(name = "id")
@@ -26,7 +33,7 @@ public class Student {
         this.id = id;
     }
 
-    @Column(name = "finance_type")
+    @Column(name = "finance_type",nullable = false)
     public String getFinanceType() {
         return financeType;
     }

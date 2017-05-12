@@ -6,12 +6,18 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import ua.km.khnu.virtual.university.error.ConflictException;
 import ua.km.khnu.virtual.university.model.Period;
 import ua.km.khnu.virtual.university.model.PeriodInstance;
+import ua.km.khnu.virtual.university.model.SubjectInstance;
+import ua.km.khnu.virtual.university.model.TeacherSubjectInstance;
 import ua.km.khnu.virtual.university.repositories.PeriodInstanceRepository;
 import ua.km.khnu.virtual.university.repositories.PeriodRepository;
 import ua.km.khnu.virtual.university.transfare.CreatePeriodInstanceForm;
 import ua.km.khnu.virtual.university.transfare.UpdatePeriodInstanceForm;
+import ua.km.khnu.virtual.university.util.EveryDayOfWeekRange;
+
+import java.time.LocalDate;
 
 import static ua.km.khnu.virtual.university.util.EntityUtils.retrieveOneOrThrowNotFound;
 import static ua.km.khnu.virtual.university.util.EntityUtils.throwNotFoundIfNotExists;
@@ -42,7 +48,7 @@ public class PeriodInstanceServiceImpl implements PeriodInstanceService {
         throwNotFoundIfNotExists(
                 periodRepository::exists,
                 form.getPeriodId(),
-                PeriodInstance.class
+                Period.class
         );
 
         Period period = new Period(form.getPeriodId());
@@ -63,7 +69,7 @@ public class PeriodInstanceServiceImpl implements PeriodInstanceService {
                 periodInstanceId,
                 PeriodInstance.class
         );
-        modelMapper.map(form,periodInstance);
+        modelMapper.map(form, periodInstance);
         return periodInstanceRepository.save(periodInstance);
     }
 
@@ -76,4 +82,35 @@ public class PeriodInstanceServiceImpl implements PeriodInstanceService {
         );
         periodInstanceRepository.delete(periodInstanceId);
     }
+
+    @Override
+    public void createAll(int periodId) {
+        Period period = retrieveOneOrThrowNotFound(
+                periodRepository::findOne,
+                periodId,
+                Period.class
+        );
+        TeacherSubjectInstance teacherSubjectInstance = period.getTeacherSubjectInstance();
+        SubjectInstance subjectInstance = teacherSubjectInstance.getSubjectInstance();
+        LocalDate dateBegin = subjectInstance.getDateBegin();
+        LocalDate dateEnd = subjectInstance.getDateEnd();
+
+        EveryDayOfWeekRange range = new EveryDayOfWeekRange(dateBegin, dateEnd, period.getOddEven(), period.getDayOfWeek());
+        for (LocalDate current : range){
+            if (periodInstanceRepository.existsByDateAndPeriodId(current,periodId))
+                throw new ConflictException("Such period instance already exists");
+
+            PeriodInstance periodInstance = new PeriodInstance();
+            periodInstance.setDate(current);
+            periodInstance.setType(teacherSubjectInstance.getPeriodType());
+            periodInstance.setPeriod(period);
+            periodInstanceRepository.save(periodInstance);
+        }
+    }
+
+    @Override
+    public void deleteAll(int periodId) {
+        periodInstanceRepository.deleteAllByPeriodId(periodId);
+    }
+
 }

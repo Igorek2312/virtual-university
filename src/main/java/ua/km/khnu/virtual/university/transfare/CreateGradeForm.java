@@ -4,14 +4,16 @@ package ua.km.khnu.virtual.university.transfare;
  * @author Igor Rybak
  */
 public class CreateGradeForm {
-    private byte value;
+    private Byte value;
+    private boolean present;
     private int periodInstanceId;
+    private int studentId;
 
-    public byte getValue() {
+    public Byte getValue() {
         return value;
     }
 
-    public void setValue(byte value) {
+    public void setValue(Byte value) {
         this.value = value;
     }
 
@@ -21,5 +23,21 @@ public class CreateGradeForm {
 
     public void setPeriodInstanceId(int periodInstanceId) {
         this.periodInstanceId = periodInstanceId;
+    }
+
+    public boolean isPresent() {
+        return present;
+    }
+
+    public void setPresent(boolean present) {
+        this.present = present;
+    }
+
+    public int getStudentId() {
+        return studentId;
+    }
+
+    public void setStudentId(int studentId) {
+        this.studentId = studentId;
     }
 }

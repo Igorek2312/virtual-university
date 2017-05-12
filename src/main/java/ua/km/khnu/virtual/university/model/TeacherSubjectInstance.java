@@ -30,7 +30,7 @@ public class TeacherSubjectInstance {
         this.id = id;
     }
 
-    @Column(name = "period_type")
+    @Column(name = "period_type", nullable = false)
     public String getPeriodType() {
         return periodType;
     }

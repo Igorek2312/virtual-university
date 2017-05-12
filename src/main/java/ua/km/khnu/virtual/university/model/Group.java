@@ -37,7 +37,7 @@ public class Group {
         this.id = id;
     }
 
-    @Column(name = "name")
+    @Column(name = "name",nullable = false)
     public String getName() {
         return name;
     }
@@ -47,7 +47,7 @@ public class Group {
     }
 
 
-    @Column(name = "year_entered", columnDefinition = "YEAR")
+    @Column(name = "year_entered", columnDefinition = "YEAR",nullable = false)
     public Year getYearEntered() {
         return yearEntered;
     }
@@ -56,7 +56,7 @@ public class Group {
         this.yearEntered = yearEntered;
     }
 
-    @Column(name = "year_of_study_entered")
+    @Column(name = "year_of_study_entered",nullable = false)
     public int getYearOfStudyEntered() {
         return yearOfStudyEntered;
     }
