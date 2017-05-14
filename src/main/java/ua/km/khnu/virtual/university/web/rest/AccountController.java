@@ -1,4 +1,4 @@
-package ua.km.khnu.virtual.university.web;
+package ua.km.khnu.virtual.university.web.rest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
