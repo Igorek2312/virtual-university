@@ -4,6 +4,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ua.km.khnu.virtual.university.model.Group;
@@ -12,10 +13,10 @@ import ua.km.khnu.virtual.university.repositories.GroupRepository;
 import ua.km.khnu.virtual.university.repositories.SpecialtyRepository;
 import ua.km.khnu.virtual.university.transfare.GroupForm;
 
-import java.time.Year;
+import java.util.List;
 
-import static ua.km.khnu.virtual.university.util.EntityUtils.retrieveOneOrThrowNotFound;
-import static ua.km.khnu.virtual.university.util.EntityUtils.throwNotFoundIfNotExists;
+import static ua.km.khnu.virtual.university.util.legacy.EntityUtils.retrieveOneOrThrowNotFound;
+import static ua.km.khnu.virtual.university.util.legacy.EntityUtils.throwNotFoundIfNotExists;
 
 /**
  * @author Igor Rybak
@@ -40,7 +41,6 @@ public class GroupServiceImpl implements GroupService {
 
     private Group mapToGroup(GroupForm groupForm) {
         Group group = modelMapper.map(groupForm, Group.class);
-        group.setYearEntered(Year.of(groupForm.getYearEntered()));
         return group;
     }
 
@@ -63,14 +63,14 @@ public class GroupServiceImpl implements GroupService {
     }
 
     @Override
-    public Page<Group> getBySpecialty(int specialtyId, Pageable pageable) {
+    public List<Group> getBySpecialty(int specialtyId, Sort sort) {
         throwNotFoundIfNotExists(
                 specialtyRepository::exists,
                 specialtyId,
                 Specialty.class
         );
 
-        return groupRepository.findBySpecialtyId(specialtyId, pageable);
+        return groupRepository.findBySpecialtyId(specialtyId, sort);
     }
 
     @Override
@@ -94,5 +94,10 @@ public class GroupServiceImpl implements GroupService {
         );
 
         groupRepository.delete(groupId);
+    }
+
+    @Override
+    public Group get(int groupId) {
+        return groupRepository.findOne(groupId);
     }
 }

@@ -10,8 +10,8 @@ import ua.km.khnu.virtual.university.model.Classroom;
 import ua.km.khnu.virtual.university.repositories.ClassroomRepository;
 import ua.km.khnu.virtual.university.transfare.ClassroomForm;
 
-import static ua.km.khnu.virtual.university.util.EntityUtils.retrieveOneOrThrowNotFound;
-import static ua.km.khnu.virtual.university.util.EntityUtils.throwNotFoundIfNotExists;
+import static ua.km.khnu.virtual.university.util.legacy.EntityUtils.retrieveOneOrThrowNotFound;
+import static ua.km.khnu.virtual.university.util.legacy.EntityUtils.throwNotFoundIfNotExists;
 
 /**
  * @author Igor Rybak

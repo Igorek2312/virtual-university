@@ -11,8 +11,10 @@ import ua.km.khnu.virtual.university.repositories.FacultyRepository;
 import ua.km.khnu.virtual.university.repositories.SpecialtyRepository;
 import ua.km.khnu.virtual.university.transfare.CreateSpecialtyForm;
 
-import static ua.km.khnu.virtual.university.util.EntityUtils.retrieveOneOrThrowNotFound;
-import static ua.km.khnu.virtual.university.util.EntityUtils.throwNotFoundIfNotExists;
+import java.util.List;
+
+import static ua.km.khnu.virtual.university.util.legacy.EntityUtils.retrieveOneOrThrowNotFound;
+import static ua.km.khnu.virtual.university.util.legacy.EntityUtils.throwNotFoundIfNotExists;
 
 /**
  * @author Igor Rybak
@@ -30,12 +32,8 @@ public class SpecialtyServiceImpl implements SpecialtyService {
     }
 
     @Override
-    public Specialty create(CreateSpecialtyForm form) {
-        throwNotFoundIfNotExists(facultyRepository::exists, form.getFacultyId(), Faculty.class);
-
-        Specialty specialty = new Specialty();
-        specialty.setFaculty(new Faculty(form.getFacultyId()));
-        specialty.setName(form.getName());
+    public Specialty create(Specialty specialty, int facultyId) {
+        specialty.setFaculty(new Faculty(facultyId));
         specialtyRepository.save(specialty);
         return specialty;
     }
@@ -65,8 +63,8 @@ public class SpecialtyServiceImpl implements SpecialtyService {
     }
 
     @Override
-    public Page<Specialty> getByFaculty(int facultyId, Pageable pageable) {
+    public List<Specialty> getByFaculty(int facultyId) {
         throwNotFoundIfNotExists(facultyRepository::exists, facultyId, Faculty.class);
-        return specialtyRepository.findByFacultyId(facultyId, pageable);
+        return specialtyRepository.findByFacultyId(facultyId);
     }
 }

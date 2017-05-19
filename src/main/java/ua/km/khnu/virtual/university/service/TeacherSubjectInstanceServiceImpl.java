@@ -15,8 +15,8 @@ import ua.km.khnu.virtual.university.repositories.TeacherSubjectInstanceReposito
 import ua.km.khnu.virtual.university.transfare.CreateTeacherSubjectInstanceForm;
 import ua.km.khnu.virtual.university.transfare.UpdateTeacherSubjectInstanceForm;
 
-import static ua.km.khnu.virtual.university.util.EntityUtils.retrieveOneOrThrowNotFound;
-import static ua.km.khnu.virtual.university.util.EntityUtils.throwNotFoundIfNotExists;
+import static ua.km.khnu.virtual.university.util.legacy.EntityUtils.retrieveOneOrThrowNotFound;
+import static ua.km.khnu.virtual.university.util.legacy.EntityUtils.throwNotFoundIfNotExists;
 
 /**
  * @author Igor Rybak

@@ -1,8 +1,10 @@
 package ua.km.khnu.virtual.university.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.*;
+import javax.validation.Valid;
 
 /**
  * @author Igor Rybak
@@ -10,9 +12,12 @@ import javax.persistence.*;
 @Entity
 public class Student {
     private Integer id;
+    @NotBlank
     private String financeType;
+    @NotBlank
     private String recordBookNumber;
     private Group group;
+    @Valid
     private Account account;
 
     public Student() {
@@ -62,7 +67,7 @@ public class Student {
         this.group = group;
     }
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "account_id", referencedColumnName = "id", nullable = false)
     public Account getAccount() {
         return account;

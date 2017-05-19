@@ -1,7 +1,7 @@
 package ua.km.khnu.virtual.university.util;
 
-import ua.km.khnu.virtual.university.error.CustomException;
-import ua.km.khnu.virtual.university.error.NoEntityWithSuchIdCustomException;
+
+import ua.km.khnu.virtual.university.error.NotFoundException;
 
 import java.util.function.Function;
 
@@ -25,7 +25,7 @@ public class EntityUtils {
      * @param <T>         the type of entity
      * @param <ID>        the type of entity
      * @return the found entity if present
-     * @throws NoEntityWithSuchIdCustomException if entity was not found
+     * @throws NotFoundException if entity was not found
      */
     public static <T, ID> T retrieveOneOrThrowNotFound(
             Function<ID, T> retrieveOne,
@@ -35,9 +35,8 @@ public class EntityUtils {
         T entity = retrieveOne.apply(id);
         if (entity != null) return entity;
 
-        CustomException exception = new NoEntityWithSuchIdCustomException();
-        exception.setDescriptionArgs(entityType.getName(), id);
-        throw exception;
+        String messageCode = "The requested resource {0} with id {1} was not found";
+        throw new NotFoundException(messageCode,entityType.getName(), id);
     }
 
     /**
@@ -49,7 +48,7 @@ public class EntityUtils {
      * @param entityType the Class object corresponding to the entity type
      * @param <T>        the type of entity
      * @param <ID>       the type of entity
-     * @throws NoEntityWithSuchIdCustomException if entity was not found
+     * @throws NotFoundException if entity was not found
      */
     public static <T, ID> void throwNotFoundIfNotExists(
             Function<ID, Boolean> exists,
@@ -58,8 +57,7 @@ public class EntityUtils {
     ) {
         if (exists.apply(id)) return;
 
-        CustomException exception = new NoEntityWithSuchIdCustomException();
-        exception.setDescriptionArgs(entityType.getName(), id);
-        throw exception;
+        String messageCode = "The requested resource {0} with id {1} was not found";
+        throw new NotFoundException(messageCode,entityType.getName(), id);
     }
 }

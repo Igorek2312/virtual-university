@@ -1,6 +1,8 @@
 package ua.km.khnu.virtual.university.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.*;
 
@@ -10,6 +12,9 @@ import javax.persistence.*;
 @Entity
 public class Specialty {
     private Integer id;
+
+    @NotBlank
+    @Length(min=5,max = 255)
     private String name;
     private Faculty faculty;
 

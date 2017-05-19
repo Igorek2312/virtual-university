@@ -4,12 +4,12 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ua.km.khnu.virtual.university.error.NoAccountWithSuchDocumentNumberException;
+import ua.km.khnu.virtual.university.error.legacy.NoAccountWithSuchDocumentNumberException;
 import ua.km.khnu.virtual.university.model.Account;
 import ua.km.khnu.virtual.university.repositories.AccountRepository;
 import ua.km.khnu.virtual.university.transfare.EnableAccountForm;
 
-import static ua.km.khnu.virtual.university.util.EntityUtils.retrieveOneOrThrowNotFound;
+import static ua.km.khnu.virtual.university.util.legacy.EntityUtils.retrieveOneOrThrowNotFound;
 
 /**
  * @author Igor Rybak

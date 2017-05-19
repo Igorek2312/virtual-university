@@ -13,8 +13,8 @@ import ua.km.khnu.virtual.university.repositories.RoleRepository;
 import ua.km.khnu.virtual.university.repositories.TeacherRepository;
 import ua.km.khnu.virtual.university.transfare.TeacherForm;
 
-import static ua.km.khnu.virtual.university.util.EntityUtils.retrieveOneOrThrowNotFound;
-import static ua.km.khnu.virtual.university.util.EntityUtils.throwNotFoundIfNotExists;
+import static ua.km.khnu.virtual.university.util.legacy.EntityUtils.retrieveOneOrThrowNotFound;
+import static ua.km.khnu.virtual.university.util.legacy.EntityUtils.throwNotFoundIfNotExists;
 
 /**
  * @author Igor Rybak

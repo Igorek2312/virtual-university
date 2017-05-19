@@ -4,6 +4,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ua.km.khnu.virtual.university.model.Account;
@@ -16,8 +17,10 @@ import ua.km.khnu.virtual.university.repositories.RoleRepository;
 import ua.km.khnu.virtual.university.repositories.StudentRepository;
 import ua.km.khnu.virtual.university.transfare.CreateStudentForm;
 
-import static ua.km.khnu.virtual.university.util.EntityUtils.retrieveOneOrThrowNotFound;
-import static ua.km.khnu.virtual.university.util.EntityUtils.throwNotFoundIfNotExists;
+import java.util.List;
+
+import static ua.km.khnu.virtual.university.util.legacy.EntityUtils.retrieveOneOrThrowNotFound;
+import static ua.km.khnu.virtual.university.util.legacy.EntityUtils.throwNotFoundIfNotExists;
 
 /**
  * @author Igor Rybak
@@ -70,8 +73,8 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public Page<Student> getByGroup(int groupId, Pageable pageable) {
-        return studentRepository.findByGroupId(groupId, pageable);
+    public List<Student> getByGroup(int groupId, Sort sort) {
+        return studentRepository.findByGroupId(groupId, sort);
     }
 
     @Override

@@ -1,9 +1,11 @@
 package ua.km.khnu.virtual.university.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.Range;
 
 import javax.persistence.*;
-import java.time.Year;
 import java.util.Collection;
 
 /**
@@ -13,8 +15,12 @@ import java.util.Collection;
 @Table(name = "`group`")
 public class Group {
     private Integer id;
+    @NotBlank
+    @Length(min = 5,max = 10)
     private String name;
-    private Year yearEntered;
+    @Range(min = 1900,max = 3000)
+    private int yearEntered;
+    @Range(min = 1,max = 6)
     private int yearOfStudyEntered;
     private Specialty specialty;
     private Collection<Student> students;
@@ -37,7 +43,7 @@ public class Group {
         this.id = id;
     }
 
-    @Column(name = "name",nullable = false)
+    @Column(name = "name", nullable = false)
     public String getName() {
         return name;
     }
@@ -47,16 +53,16 @@ public class Group {
     }
 
 
-    @Column(name = "year_entered", columnDefinition = "YEAR",nullable = false)
-    public Year getYearEntered() {
+    @Column(name = "year_entered", columnDefinition = "YEAR", nullable = false)
+    public int getYearEntered() {
         return yearEntered;
     }
 
-    public void setYearEntered(Year yearEntered) {
+    public void setYearEntered(int yearEntered) {
         this.yearEntered = yearEntered;
     }
 
-    @Column(name = "year_of_study_entered",nullable = false)
+    @Column(name = "year_of_study_entered", nullable = false)
     public int getYearOfStudyEntered() {
         return yearOfStudyEntered;
     }
@@ -76,13 +82,13 @@ public class Group {
         this.specialty = specialty;
     }
 
-     @OneToMany(mappedBy = "group")
-     @JsonIgnore
-     public Collection<Student> getStudents() {
-         return students;
-     }
+    @OneToMany(mappedBy = "group")
+    @JsonIgnore
+    public Collection<Student> getStudents() {
+        return students;
+    }
 
-     public void setStudents(Collection<Student> students) {
-         this.students = students;
-     }
+    public void setStudents(Collection<Student> students) {
+        this.students = students;
+    }
 }

@@ -1,18 +1,18 @@
+<%@ tag pageEncoding="UTF-8" language="java" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
-<%@tag pageEncoding="UTF-8" language="java"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <meta name="description" content="Page Description">
     <meta name="author" content="Igor Rybak">
     <title>Page Title</title>
 
-    <link href="webjars/bootstrap/3.3.7-1/css/bootstrap.min.css" rel="stylesheet">
-
+    <link rel="stylesheet" href="/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/webjars/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
 
@@ -24,14 +24,30 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="/">Title</a>
+        <a class="navbar-brand" href="/"><spring:message code="label.virtual.university"/></a>
     </div>
-
     <div class="collapse navbar-collapse navbar-ex1-collapse">
         <ul class="nav navbar-nav">
-            <li class="<%=request.getRequestURI().startsWith("/faculties")?"active":""%>">
-                <a href="/faculties"><spring:message code="label.students"/></a>
-            </li>
+            <sec:authorize access="isAnonymous()">
+                <li class="${pageContext.request.requestURI eq '/WEB-INF/views/login.jsp' ? ' active' : ''}">
+                    <a href="/login"><spring:message code="label.log.in"/></a>
+                </li>
+            </sec:authorize>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <sec:authorize access="isAuthenticated()">
+                <li class="${pageContext.request.requestURI eq '/WEB-INF/views/profile.jsp' ? ' active' : ''}">
+                    <spring:message code="label.profile" var="profile"/>
+                    <a href="/profile" data-toggle="tooltip" title="${profile}">
+                        <i class="fa fa-user"></i>
+                        <sec:authentication property="principal.firstName"/>
+                        <sec:authentication property="principal.lastName"/>
+                    </a>
+                </li>
+                <li>
+                    <a href="/logout"><spring:message code="label.log.out"/></a>
+                </li>
+            </sec:authorize>
         </ul>
     </div>
 </nav>
@@ -39,6 +55,9 @@
 <div class="container-fluid">
     <jsp:doBody/>
 </div>
+
+<script src="/webjars/jquery/1.11.1/jquery.min.js"></script>
+<script src="/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js"></script>
 
 </body>
 </html>

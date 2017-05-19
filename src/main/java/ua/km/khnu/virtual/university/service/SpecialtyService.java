@@ -5,11 +5,13 @@ import org.springframework.data.domain.Pageable;
 import ua.km.khnu.virtual.university.model.Specialty;
 import ua.km.khnu.virtual.university.transfare.CreateSpecialtyForm;
 
+import java.util.List;
+
 /**
  * @author Igor Rybak
  */
 public interface SpecialtyService {
-    Specialty create(CreateSpecialtyForm form);
+    Specialty create(Specialty specialty, int facultyId);
 
     Specialty get(int id);
 
@@ -19,5 +21,5 @@ public interface SpecialtyService {
 
     void delete(int id);
 
-    Page<Specialty> getByFaculty(int facultyId, Pageable pageable);
+    List<Specialty> getByFaculty(int facultyId);
 }

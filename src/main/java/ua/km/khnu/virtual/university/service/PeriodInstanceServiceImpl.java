@@ -6,7 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ua.km.khnu.virtual.university.error.ConflictException;
+import ua.km.khnu.virtual.university.error.legacy.ConflictException;
 import ua.km.khnu.virtual.university.model.Period;
 import ua.km.khnu.virtual.university.model.PeriodInstance;
 import ua.km.khnu.virtual.university.model.SubjectInstance;
@@ -19,8 +19,8 @@ import ua.km.khnu.virtual.university.util.EveryDayOfWeekRange;
 
 import java.time.LocalDate;
 
-import static ua.km.khnu.virtual.university.util.EntityUtils.retrieveOneOrThrowNotFound;
-import static ua.km.khnu.virtual.university.util.EntityUtils.throwNotFoundIfNotExists;
+import static ua.km.khnu.virtual.university.util.legacy.EntityUtils.retrieveOneOrThrowNotFound;
+import static ua.km.khnu.virtual.university.util.legacy.EntityUtils.throwNotFoundIfNotExists;
 
 /**
  * @author Igor Rybak

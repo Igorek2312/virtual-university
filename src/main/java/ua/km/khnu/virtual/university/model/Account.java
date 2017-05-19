@@ -1,5 +1,9 @@
 package ua.km.khnu.virtual.university.model;
 
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotBlank;
+import ua.km.khnu.virtual.university.service.validation.NullOrNotBlank;
+
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
@@ -10,12 +14,24 @@ import java.util.Set;
 @Entity
 public class Account {
     private Integer id;
+    @NotBlank
+    @Length(min = 1,max = 255)
     private String firstName;
+    @NotBlank
+    @Length(min = 1,max = 255)
     private String lastName;
+    @NotBlank
+    @Length(min = 1,max = 255)
     private String middleName;
+    @NullOrNotBlank
+    @Length(min = 5,max = 20)
     private String username;
+    @NullOrNotBlank
+    @Length(min = 5,max = 20)
     private String password;
-    private Set<Role> roles=new HashSet<>();
+    private Set<Role> roles = new HashSet<>();
+    @NotBlank
+    @Length(min = 1,max = 10)
     private String documentNumber;
     private boolean enabled;
 
@@ -26,6 +42,8 @@ public class Account {
         this.username = account.getUsername();
         this.password = account.getPassword();
         this.enabled = account.isEnabled();
+        this.firstName = account.firstName;
+        this.lastName = account.lastName;
         this.roles = account.getRoles();
     }
 
@@ -86,7 +104,7 @@ public class Account {
     }
 
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(
             name = "account_role",
             joinColumns = @JoinColumn(name = "account_id"),
