@@ -13,6 +13,7 @@
 
     <link rel="stylesheet" href="/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css">
     <link rel="stylesheet" href="/webjars/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/main.css">
 </head>
 <body>
 
@@ -31,6 +32,9 @@
             <sec:authorize access="isAnonymous()">
                 <li class="${pageContext.request.requestURI eq '/WEB-INF/views/login.jsp' ? ' active' : ''}">
                     <a href="/login"><spring:message code="label.log.in"/></a>
+                </li>
+                <li class="${pageContext.request.requestURI eq '/WEB-INF/views/sing-up.jsp' ? ' active' : ''}">
+                    <a href="/sign-up"><spring:message code="label.sign.up"/></a>
                 </li>
             </sec:authorize>
         </ul>

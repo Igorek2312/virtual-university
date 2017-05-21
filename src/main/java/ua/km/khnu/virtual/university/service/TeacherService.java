@@ -3,7 +3,7 @@ package ua.km.khnu.virtual.university.service;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import ua.km.khnu.virtual.university.model.Teacher;
-import ua.km.khnu.virtual.university.transfare.TeacherForm;
+import ua.km.khnu.virtual.university.transfare.legacy.TeacherForm;
 
 /**
  * @author Igor Rybak

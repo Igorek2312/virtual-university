@@ -1,6 +1,7 @@
 package ua.km.khnu.virtual.university.web.student;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
@@ -35,6 +36,7 @@ public class EditStudentController {
         return "student/edit-student";
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping("/edit-student/{studentId}")
     public String updateStudent(
             @ModelAttribute("student") @Validated Student student,

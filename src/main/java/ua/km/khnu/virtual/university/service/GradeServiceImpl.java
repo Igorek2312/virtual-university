@@ -12,8 +12,8 @@ import ua.km.khnu.virtual.university.model.Student;
 import ua.km.khnu.virtual.university.repositories.GradeRepository;
 import ua.km.khnu.virtual.university.repositories.PeriodInstanceRepository;
 import ua.km.khnu.virtual.university.repositories.StudentRepository;
-import ua.km.khnu.virtual.university.transfare.CreateGradeForm;
-import ua.km.khnu.virtual.university.transfare.UpdateGradeForm;
+import ua.km.khnu.virtual.university.transfare.legacy.CreateGradeForm;
+import ua.km.khnu.virtual.university.transfare.legacy.UpdateGradeForm;
 
 import java.util.List;
 

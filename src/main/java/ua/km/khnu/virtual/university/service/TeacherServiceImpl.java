@@ -11,7 +11,7 @@ import ua.km.khnu.virtual.university.model.Teacher;
 import ua.km.khnu.virtual.university.repositories.AccountRepository;
 import ua.km.khnu.virtual.university.repositories.RoleRepository;
 import ua.km.khnu.virtual.university.repositories.TeacherRepository;
-import ua.km.khnu.virtual.university.transfare.TeacherForm;
+import ua.km.khnu.virtual.university.transfare.legacy.TeacherForm;
 
 import static ua.km.khnu.virtual.university.util.legacy.EntityUtils.retrieveOneOrThrowNotFound;
 import static ua.km.khnu.virtual.university.util.legacy.EntityUtils.throwNotFoundIfNotExists;

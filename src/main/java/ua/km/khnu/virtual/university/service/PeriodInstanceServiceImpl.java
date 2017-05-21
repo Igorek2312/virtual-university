@@ -13,8 +13,8 @@ import ua.km.khnu.virtual.university.model.SubjectInstance;
 import ua.km.khnu.virtual.university.model.TeacherSubjectInstance;
 import ua.km.khnu.virtual.university.repositories.PeriodInstanceRepository;
 import ua.km.khnu.virtual.university.repositories.PeriodRepository;
-import ua.km.khnu.virtual.university.transfare.CreatePeriodInstanceForm;
-import ua.km.khnu.virtual.university.transfare.UpdatePeriodInstanceForm;
+import ua.km.khnu.virtual.university.transfare.legacy.CreatePeriodInstanceForm;
+import ua.km.khnu.virtual.university.transfare.legacy.UpdatePeriodInstanceForm;
 import ua.km.khnu.virtual.university.util.EveryDayOfWeekRange;
 
 import java.time.LocalDate;

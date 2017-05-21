@@ -2,6 +2,7 @@ package ua.km.khnu.virtual.university.web.student;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
@@ -65,6 +66,7 @@ public class StudentController {
         return "student/students";
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping("/groups/{groupId}/students")
     public String postStudent(
             @ModelAttribute("student") @Validated Student student,
@@ -79,6 +81,7 @@ public class StudentController {
         return "redirect:/groups/" + groupId + "/students";
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/groups/{groupId}/delete-student/{studentId}")
     public String deleteStudent(
             @PathVariable int groupId,

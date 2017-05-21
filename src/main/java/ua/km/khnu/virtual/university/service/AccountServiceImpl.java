@@ -7,7 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 import ua.km.khnu.virtual.university.error.legacy.NoAccountWithSuchDocumentNumberException;
 import ua.km.khnu.virtual.university.model.Account;
 import ua.km.khnu.virtual.university.repositories.AccountRepository;
-import ua.km.khnu.virtual.university.transfare.EnableAccountForm;
+import ua.km.khnu.virtual.university.transfare.legacy.EnableAccountForm;
 
 import static ua.km.khnu.virtual.university.util.legacy.EntityUtils.retrieveOneOrThrowNotFound;
 

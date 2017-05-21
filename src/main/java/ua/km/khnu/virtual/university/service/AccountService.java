@@ -1,7 +1,7 @@
 package ua.km.khnu.virtual.university.service;
 
 import ua.km.khnu.virtual.university.model.Account;
-import ua.km.khnu.virtual.university.transfare.EnableAccountForm;
+import ua.km.khnu.virtual.university.transfare.legacy.EnableAccountForm;
 
 /**
  * @author Igor Rybak

@@ -3,8 +3,8 @@ package ua.km.khnu.virtual.university.service;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import ua.km.khnu.virtual.university.model.PeriodInstance;
-import ua.km.khnu.virtual.university.transfare.CreatePeriodInstanceForm;
-import ua.km.khnu.virtual.university.transfare.UpdatePeriodInstanceForm;
+import ua.km.khnu.virtual.university.transfare.legacy.CreatePeriodInstanceForm;
+import ua.km.khnu.virtual.university.transfare.legacy.UpdatePeriodInstanceForm;
 
 /**
  * @author Igor Rybak

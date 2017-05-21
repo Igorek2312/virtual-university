@@ -4,7 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
-import ua.km.khnu.virtual.university.transfare.CreateSubjectInstanceForm;
+import ua.km.khnu.virtual.university.transfare.legacy.CreateSubjectInstanceForm;
 
 import java.time.LocalDate;
 

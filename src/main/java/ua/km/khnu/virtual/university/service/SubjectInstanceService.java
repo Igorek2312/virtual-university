@@ -3,18 +3,23 @@ package ua.km.khnu.virtual.university.service;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import ua.km.khnu.virtual.university.model.SubjectInstance;
-import ua.km.khnu.virtual.university.transfare.CreateSubjectInstanceForm;
-import ua.km.khnu.virtual.university.transfare.UpdateSubjectInstanceForm;
+import ua.km.khnu.virtual.university.transfare.SemesterDto;
+
+import java.util.List;
 
 /**
  * @author Igor Rybak
  */
 public interface SubjectInstanceService {
-    SubjectInstance create(CreateSubjectInstanceForm form);
+    SubjectInstance prepareNew();
 
-    Page<SubjectInstance> getAll(Pageable pageable);
+    SubjectInstance create(SubjectInstance subjectInstance, int groupId, int subjectId);
 
-    SubjectInstance update(int subjectInstanceId, UpdateSubjectInstanceForm form);
+    Page<SubjectInstance> getByGroupAndSemester(Pageable pageable, int year, int semester);
+
+    List<SemesterDto> getSemesters(int groupId);
 
     void delete(int subjectInstanceId);
+
+    List<SubjectInstance> getBySemester(int groupId, int year, int semesterNumber);
 }

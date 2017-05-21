@@ -4,21 +4,14 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
-import org.modelmapper.Condition;
 import org.modelmapper.ModelMapper;
-import org.modelmapper.spi.MappingContext;
 import ua.km.khnu.virtual.university.config.GeneralConfiguration;
-import ua.km.khnu.virtual.university.model.Group;
 import ua.km.khnu.virtual.university.model.Specialty;
 import ua.km.khnu.virtual.university.model.SubjectInstance;
-import ua.km.khnu.virtual.university.refrence.OddEvenWeek;
-import ua.km.khnu.virtual.university.transfare.CreateSpecialtyForm;
-import ua.km.khnu.virtual.university.transfare.CreateSubjectInstanceForm;
-import ua.km.khnu.virtual.university.transfare.GroupForm;
+import ua.km.khnu.virtual.university.transfare.legacy.CreateSpecialtyForm;
+import ua.km.khnu.virtual.university.transfare.legacy.CreateSubjectInstanceForm;
 
-import java.time.Duration;
 import java.time.LocalDate;
-import java.time.Year;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;

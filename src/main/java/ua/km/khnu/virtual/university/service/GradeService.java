@@ -3,8 +3,8 @@ package ua.km.khnu.virtual.university.service;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import ua.km.khnu.virtual.university.model.Grade;
-import ua.km.khnu.virtual.university.transfare.CreateGradeForm;
-import ua.km.khnu.virtual.university.transfare.UpdateGradeForm;
+import ua.km.khnu.virtual.university.transfare.legacy.CreateGradeForm;
+import ua.km.khnu.virtual.university.transfare.legacy.UpdateGradeForm;
 
 import java.util.List;
 

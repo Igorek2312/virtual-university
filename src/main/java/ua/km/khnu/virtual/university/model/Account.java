@@ -2,7 +2,6 @@ package ua.km.khnu.virtual.university.model;
 
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
-import ua.km.khnu.virtual.university.service.validation.NullOrNotBlank;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -23,12 +22,11 @@ public class Account {
     @NotBlank
     @Length(min = 1,max = 255)
     private String middleName;
-    @NullOrNotBlank
-    @Length(min = 5,max = 20)
+
     private String username;
-    @NullOrNotBlank
-    @Length(min = 5,max = 20)
+
     private String password;
+
     private Set<Role> roles = new HashSet<>();
     @NotBlank
     @Length(min = 1,max = 10)

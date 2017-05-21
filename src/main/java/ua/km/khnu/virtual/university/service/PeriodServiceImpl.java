@@ -12,8 +12,8 @@ import ua.km.khnu.virtual.university.model.TeacherSubjectInstance;
 import ua.km.khnu.virtual.university.repositories.ClassroomRepository;
 import ua.km.khnu.virtual.university.repositories.PeriodRepository;
 import ua.km.khnu.virtual.university.repositories.TeacherSubjectInstanceRepository;
-import ua.km.khnu.virtual.university.transfare.CreatePeriodForm;
-import ua.km.khnu.virtual.university.transfare.UpdatePeriodForm;
+import ua.km.khnu.virtual.university.transfare.legacy.CreatePeriodForm;
+import ua.km.khnu.virtual.university.transfare.legacy.UpdatePeriodForm;
 
 import static ua.km.khnu.virtual.university.util.legacy.EntityUtils.retrieveOneOrThrowNotFound;
 import static ua.km.khnu.virtual.university.util.legacy.EntityUtils.throwNotFoundIfNotExists;

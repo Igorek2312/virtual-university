@@ -86,6 +86,7 @@
                 <th><spring:message code="label.students"/></th>
                 <sec:authorize access="hasRole('ROLE_ADMIN')">
                     <th></th>
+                    <th></th>
                 </sec:authorize>
             </tr>
             </thead>
@@ -101,6 +102,11 @@
                         </a>
                     </td>
                     <sec:authorize access="hasRole('ROLE_ADMIN')">
+                        <td>
+                            <a href="/groups/${group.id}/create-subject-instance">
+                                <spring:message code="label.curriculum"/>
+                            </a>
+                        </td>
                         <td>
                             <a href="/edit-group/${group.id}">
                                 <button class="btn btn-primary">
