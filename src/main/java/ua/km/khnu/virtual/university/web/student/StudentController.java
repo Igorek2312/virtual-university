@@ -51,7 +51,7 @@ public class StudentController {
         student.setGroup(group);
         Role role = roleRepository.findByName("ROLE_STUDENT");
         Account account = new Account();
-        account.setRoles(Collections.singleton(role));
+        account.getRoles().add(role);
         student.setAccount(account);
         return student;
     }

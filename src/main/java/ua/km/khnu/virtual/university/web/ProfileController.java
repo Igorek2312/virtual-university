@@ -24,7 +24,7 @@ public class ProfileController {
         this.studentRepository = studentRepository;
     }
 
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("isAuthenticated()")
     @GetMapping("/profile")
     public String getProfile(Model model) {
         String login = SecurityUtils.getCurrentUserLogin();

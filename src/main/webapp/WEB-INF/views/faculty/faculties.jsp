@@ -30,6 +30,15 @@
                 </div>
             </div>
         </div>
+        <div class="col-sm-2">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <a href="/teachers">
+                        <i class="fa fa-folder"></i> <spring:message code="label.teachers"/>
+                    </a>
+                </div>
+            </div>
+        </div>
     </div>
 
     <sec:authorize access="hasRole('ROLE_ADMIN')">

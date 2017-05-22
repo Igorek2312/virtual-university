@@ -103,7 +103,7 @@
         <thead>
         <tr>
             <th><spring:message code="label.year"/></th>
-            <th><spring:message code="lebel.semester"/></th>
+            <th><spring:message code="label.semester"/></th>
             <th></th>
         </tr>
         </thead>
