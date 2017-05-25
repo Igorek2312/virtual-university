@@ -18,7 +18,6 @@ import ua.km.khnu.virtual.university.repositories.GroupRepository;
 import ua.km.khnu.virtual.university.repositories.RoleRepository;
 import ua.km.khnu.virtual.university.repositories.StudentRepository;
 
-import java.util.Collections;
 import java.util.List;
 
 import static ua.km.khnu.virtual.university.util.EntityUtils.retrieveOneOrThrowNotFound;

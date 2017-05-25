@@ -6,14 +6,16 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import ua.km.khnu.virtual.university.model.Account;
 import ua.km.khnu.virtual.university.model.Role;
 import ua.km.khnu.virtual.university.model.Teacher;
 import ua.km.khnu.virtual.university.repositories.AccountRepository;
 import ua.km.khnu.virtual.university.repositories.RoleRepository;
 import ua.km.khnu.virtual.university.repositories.TeacherRepository;
-import ua.km.khnu.virtual.university.util.EntityUtils;
 
 import static ua.km.khnu.virtual.university.util.EntityUtils.retrieveOneOrThrowNotFound;
 

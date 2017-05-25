@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import ua.km.khnu.virtual.university.model.Teacher;
 import ua.km.khnu.virtual.university.repositories.TeacherRepository;
-import ua.km.khnu.virtual.university.util.EntityUtils;
 
 import static ua.km.khnu.virtual.university.util.EntityUtils.retrieveOneOrThrowNotFound;
 

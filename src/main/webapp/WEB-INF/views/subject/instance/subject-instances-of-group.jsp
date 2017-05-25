@@ -14,6 +14,7 @@
             <th><spring:message code="label.date.end"/></th>
             <th><spring:message code="label.hours"/></th>
             <th></th>
+            <th></th>
         </tr>
         </thead>
         <tbody>
@@ -25,6 +26,11 @@
                 <td>${subjectInstance.dateBegin}</td>
                 <td>${subjectInstance.dateEnd}</td>
                 <td>${subjectInstance.hours}</td>
+                <td>
+                    <a href="/subject-instances/${subjectInstance.id}/teacher-subject-instances">
+                        <spring:message code="label.teachers"/>
+                    </a>
+                </td>
                 <td>
                     <a href="/edit-subject-instance/${subjectInstance.id}">
                         <button class="btn btn-primary">

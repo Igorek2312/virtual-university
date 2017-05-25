@@ -14,13 +14,13 @@ import java.util.Set;
 public class Account {
     private Integer id;
     @NotBlank
-    @Length(min = 1,max = 255)
+    @Length(min = 1, max = 255)
     private String firstName;
     @NotBlank
-    @Length(min = 1,max = 255)
+    @Length(min = 1, max = 255)
     private String lastName;
     @NotBlank
-    @Length(min = 1,max = 255)
+    @Length(min = 1, max = 255)
     private String middleName;
 
     private String username;
@@ -29,7 +29,7 @@ public class Account {
 
     private Set<Role> roles = new HashSet<>();
     @NotBlank
-    @Length(min = 1,max = 10)
+    @Length(min = 1, max = 10)
     private String documentNumber;
     private boolean enabled;
 
@@ -43,6 +43,11 @@ public class Account {
         this.firstName = account.firstName;
         this.lastName = account.lastName;
         this.roles = account.getRoles();
+    }
+
+    @Transient
+    public String getFullName() {
+        return lastName + " " + firstName + " " + lastName;
     }
 
     @Id
