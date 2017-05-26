@@ -1,24 +1,18 @@
 package ua.km.khnu.virtual.university.service;
 
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import ua.km.khnu.virtual.university.model.Period;
-import ua.km.khnu.virtual.university.transfare.legacy.CreatePeriodForm;
-import ua.km.khnu.virtual.university.transfare.legacy.UpdatePeriodForm;
+
+import java.util.List;
 
 /**
  * @author Igor Rybak
  */
 public interface PeriodService {
-    Period create(CreatePeriodForm form);
+    void save(Period period);
 
-    Page<Period> getAll(Pageable pageable);
-
-    Page<Period> getByGroup(int groupId, Pageable pageable);
-
-    Page<Period> getByTeacher(int teacherId, Pageable pageable);
-
-    Period update(int periodId, UpdatePeriodForm form);
+    List<Period> periodsSchedule(int groupId, int year, int semester);
 
     void delete(int periodId);
+
+    Period get(int periodId);
 }

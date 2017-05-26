@@ -3,6 +3,7 @@ package ua.km.khnu.virtual.university.web.subject.instance;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -36,24 +37,25 @@ public class CreateSubjectInstanceController {
         return groupId;
     }
 
-    @ModelAttribute("subjects")
-    public List<Subject> subjects() {
-        return subjectRepository.findAll();
-    }
-
     @ModelAttribute("subjectInstance")
     public SubjectInstance subjectInstance() {
         return subjectInstanceService.prepareNew();
     }
 
-    @ModelAttribute("semesters")
-    public List<SemesterDto> semesters(@PathVariable int groupId) {
-        return subjectInstanceService.getSemesters(groupId);
+    private void initModel(Model model, int groupId) {
+        List<SemesterDto> semesters = subjectInstanceService.getSemesters(groupId);
+        model.addAttribute("semesters", semesters);
+        List<Subject> subjects = subjectRepository.findAll();
+        model.addAttribute("subjects", subjects);
     }
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/groups/{groupId}/create-subject-instance")
-    public String getSubjectInstanceForm() {
+    public String getSubjectInstanceForm(
+            Model model,
+            @PathVariable int groupId
+    ) {
+        initModel(model, groupId);
         return "subject/instance/create-subject-instance";
     }
 
@@ -61,10 +63,12 @@ public class CreateSubjectInstanceController {
     @PostMapping("/groups/{groupId}/subject-instances")
     public String postSubjectInstance(
             @ModelAttribute("subjectInstance") @Validated SubjectInstance subjectInstance,
+            Model model,
             BindingResult result,
             @PathVariable int groupId
     ) {
         if (result.hasErrors()) {
+            initModel(model, groupId);
             return "subject-instance";
         }
         int subjectId = subjectInstance.getSubject().getId();

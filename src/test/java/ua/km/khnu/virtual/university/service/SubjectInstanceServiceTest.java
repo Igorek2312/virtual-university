@@ -33,6 +33,7 @@ public class SubjectInstanceServiceTest {
         subjectInstanceService = new SubjectInstanceServiceImpl(
                 subjectInstanceRepository,
                 null,
+                null,
                 null
         );
     }

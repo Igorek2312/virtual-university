@@ -4,6 +4,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <t:layout>
+    <a href="/groups/${groupId}/periods/?year=${param.year}&semester_number=${param.semester_number}">
+        <button class="btn btn-primary">
+            Розклад занять
+        </button>
+    </a>
     <table class="table table-bordered table-hover">
         <thead>
         <tr>

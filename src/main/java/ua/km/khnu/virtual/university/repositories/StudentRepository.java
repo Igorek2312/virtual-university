@@ -18,5 +18,7 @@ public interface StudentRepository extends JpaRepository<Student, Integer> {
     Page<Student> findByGroupName(String groupName, Pageable pageable);
 
     Optional<Student> findByAccountId(int accountId);
+
+    Student findByAccountUsername(String username);
 }
 

@@ -9,7 +9,9 @@ import org.springframework.transaction.annotation.Transactional;
 import ua.km.khnu.virtual.university.model.Group;
 import ua.km.khnu.virtual.university.model.Subject;
 import ua.km.khnu.virtual.university.model.SubjectInstance;
+import ua.km.khnu.virtual.university.refrence.Semester;
 import ua.km.khnu.virtual.university.repositories.GroupRepository;
+import ua.km.khnu.virtual.university.repositories.StudentRepository;
 import ua.km.khnu.virtual.university.repositories.SubjectInstanceRepository;
 import ua.km.khnu.virtual.university.repositories.SubjectRepository;
 import ua.km.khnu.virtual.university.transfare.SemesterDto;
@@ -29,16 +31,18 @@ public class SubjectInstanceServiceImpl implements SubjectInstanceService {
     private SubjectInstanceRepository subjectInstanceRepository;
     private SubjectRepository subjectRepository;
     private GroupRepository groupRepository;
+    private final StudentRepository studentRepository;
 
     @Autowired
     public SubjectInstanceServiceImpl(
             SubjectInstanceRepository subjectInstanceRepository,
             SubjectRepository subjectRepository,
-            GroupRepository groupRepository
-    ) {
+            GroupRepository groupRepository,
+            StudentRepository studentRepository) {
         this.subjectInstanceRepository = subjectInstanceRepository;
         this.subjectRepository = subjectRepository;
         this.groupRepository = groupRepository;
+        this.studentRepository = studentRepository;
     }
 
 
@@ -90,10 +94,15 @@ public class SubjectInstanceServiceImpl implements SubjectInstanceService {
 
     @Override
     public List<SubjectInstance> getBySemester(int groupId, int year, int semesterNumber) {
-        int mouthBegin = semesterNumber == 1 ? 9 : 1;//january or september
-        int mouthEnd = semesterNumber == 1 ? 12 : 8;//december or august
-        LocalDate dateBegin = LocalDate.of(year, mouthBegin, 1);
-        LocalDate dateEnd = LocalDate.of(year, mouthEnd, 31);
-        return subjectInstanceRepository.findInDateRange(groupId, dateBegin, dateEnd);
+        Semester semester = new Semester(year, semesterNumber);
+        LocalDate dateBegin = semester.getDateBegin();
+        LocalDate dateEnd = semester.getDateEnd();
+        return subjectInstanceRepository.findByGroupAndSemester(groupId, dateBegin, dateEnd);
+    }
+
+    @Override
+    public List<SemesterDto> getSemestersOfCurrentStudent() {
+
+        return null;
     }
 }

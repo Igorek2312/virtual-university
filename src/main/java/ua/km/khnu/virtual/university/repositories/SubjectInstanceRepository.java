@@ -17,7 +17,7 @@ public interface SubjectInstanceRepository extends JpaRepository<SubjectInstance
 
     @Query("select si from SubjectInstance as si where " +
             "si.dateBegin >= :dateBegin and si.dateEnd <= :dateEnd and si.group.id=:groupId")
-    List<SubjectInstance> findInDateRange(
+    List<SubjectInstance> findByGroupAndSemester(
             @Param("groupId") int groupId,
             @Param("dateBegin") LocalDate dateBegin,
             @Param("dateEnd") LocalDate dateEnd

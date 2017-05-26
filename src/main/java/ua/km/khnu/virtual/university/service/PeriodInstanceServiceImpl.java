@@ -17,6 +17,7 @@ import ua.km.khnu.virtual.university.transfare.legacy.CreatePeriodInstanceForm;
 import ua.km.khnu.virtual.university.transfare.legacy.UpdatePeriodInstanceForm;
 import ua.km.khnu.virtual.university.util.EveryDayOfWeekRange;
 
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 
 import static ua.km.khnu.virtual.university.util.legacy.EntityUtils.retrieveOneOrThrowNotFound;
@@ -95,9 +96,9 @@ public class PeriodInstanceServiceImpl implements PeriodInstanceService {
         LocalDate dateBegin = subjectInstance.getDateBegin();
         LocalDate dateEnd = subjectInstance.getDateEnd();
 
-        EveryDayOfWeekRange range = new EveryDayOfWeekRange(dateBegin, dateEnd, period.getOddEven(), period.getDayOfWeek());
-        for (LocalDate current : range){
-            if (periodInstanceRepository.existsByDateAndPeriodId(current,periodId))
+        EveryDayOfWeekRange range = new EveryDayOfWeekRange(dateBegin, dateEnd, period.getOddEven(), DayOfWeek.of(period.getDayOfWeek()));
+        for (LocalDate current : range) {
+            if (periodInstanceRepository.existsByDateAndPeriodId(current, periodId))
                 throw new ConflictException("Such period instance already exists");
 
             PeriodInstance periodInstance = new PeriodInstance();

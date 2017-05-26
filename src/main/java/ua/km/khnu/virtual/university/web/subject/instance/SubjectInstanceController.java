@@ -52,4 +52,7 @@ public class SubjectInstanceController {
         subjectInstanceService.delete(subjectInstanceId);
         return "redirect:/groups/" + groupId + "/create-subject-instance";
     }
+
+
+
 }

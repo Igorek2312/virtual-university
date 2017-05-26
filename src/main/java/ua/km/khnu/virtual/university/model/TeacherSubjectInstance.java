@@ -1,6 +1,7 @@
 package ua.km.khnu.virtual.university.model;
 
 import javax.persistence.*;
+import java.text.MessageFormat;
 
 /**
  * @author Igor Rybak
@@ -18,6 +19,12 @@ public class TeacherSubjectInstance {
 
     public TeacherSubjectInstance(int id) {
         this.id = id;
+    }
+
+    @Transient
+    public String getDetailName() {
+        String subjectName = subjectInstance.getSubject().getName();
+        return MessageFormat.format("{0} ({1})", subjectName, periodType);
     }
 
     @Id

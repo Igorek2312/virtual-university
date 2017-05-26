@@ -1,6 +1,7 @@
 <%@ tag pageEncoding="UTF-8" language="java" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -39,6 +40,13 @@
             </sec:authorize>
         </ul>
         <ul class="nav navbar-nav navbar-right">
+            <sec:authorize access="hasRole('ROLE_STUDENT')">
+                <li>
+                    <a href="/semesters">
+                        <spring:message code="label.lesson.schedule"/>
+                    </a>
+                </li>
+            </sec:authorize>
             <sec:authorize access="isAuthenticated()">
                 <li class="${pageContext.request.requestURI eq '/WEB-INF/views/profile.jsp' ? ' active' : ''}">
                     <spring:message code="label.profile" var="profile"/>

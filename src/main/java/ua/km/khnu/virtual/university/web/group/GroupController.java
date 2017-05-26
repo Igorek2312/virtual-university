@@ -80,4 +80,7 @@ public class GroupController {
         groupRepository.delete(groupId);
         return "redirect:/specialties/" + specialtyId + "/groups";
     }
+
+
+
 }

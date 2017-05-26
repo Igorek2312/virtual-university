@@ -10,7 +10,7 @@ import java.util.function.Function;
  *
  * @author Igor Rybak
  */
-public class EntityUtils {
+public final class EntityUtils {
     private EntityUtils() {
 
     }
@@ -36,7 +36,7 @@ public class EntityUtils {
         if (entity != null) return entity;
 
         String messageCode = "The requested resource {0} with id {1} was not found";
-        throw new NotFoundException(messageCode,entityType.getName(), id);
+        throw new NotFoundException(messageCode, entityType.getName(), id);
     }
 
     /**
@@ -58,6 +58,6 @@ public class EntityUtils {
         if (exists.apply(id)) return;
 
         String messageCode = "The requested resource {0} with id {1} was not found";
-        throw new NotFoundException(messageCode,entityType.getName(), id);
+        throw new NotFoundException(messageCode, entityType.getName(), id);
     }
 }

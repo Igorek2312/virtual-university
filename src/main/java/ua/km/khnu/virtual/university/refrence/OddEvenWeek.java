@@ -6,5 +6,5 @@ package ua.km.khnu.virtual.university.refrence;
 public enum OddEvenWeek {
     ODD,
     EVEN,
-    BOTH;
+    BOTH
 }

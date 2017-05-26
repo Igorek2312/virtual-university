@@ -22,4 +22,6 @@ public interface SubjectInstanceService {
     void delete(int subjectInstanceId);
 
     List<SubjectInstance> getBySemester(int groupId, int year, int semesterNumber);
+
+    List<SemesterDto> getSemestersOfCurrentStudent();
 }

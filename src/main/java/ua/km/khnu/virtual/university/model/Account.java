@@ -50,6 +50,11 @@ public class Account {
         return lastName + " " + firstName + " " + lastName;
     }
 
+    @Transient
+    public String getAbbreviationName() {
+        return lastName + " " + firstName.charAt(0) + "." + lastName.charAt(1) + ".";
+    }
+
     @Id
     @GeneratedValue
     @Column(name = "id")
@@ -138,6 +143,5 @@ public class Account {
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
     }
-
 
 }
