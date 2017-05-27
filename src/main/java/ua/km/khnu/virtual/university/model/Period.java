@@ -1,6 +1,7 @@
 package ua.km.khnu.virtual.university.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.validator.constraints.Range;
 import ua.km.khnu.virtual.university.refrence.OddEvenWeek;
 
 import javax.persistence.*;
@@ -11,8 +12,10 @@ import javax.persistence.*;
 @Entity
 public class Period {
     private Integer id;
+    @Range(min = 1,max = 6)
     private byte dayOfWeek;
     private OddEvenWeek oddEven;
+    @Range(min = 1,max = 10)
     private byte periodNumber;
     private Classroom classroom;
     private TeacherSubjectInstance teacherSubjectInstance;

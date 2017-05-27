@@ -47,12 +47,12 @@ public class Account {
 
     @Transient
     public String getFullName() {
-        return lastName + " " + firstName + " " + lastName;
+        return lastName + " " + firstName + " " + middleName;
     }
 
     @Transient
     public String getAbbreviationName() {
-        return lastName + " " + firstName.charAt(0) + "." + lastName.charAt(1) + ".";
+        return lastName + " " + firstName.charAt(0) + "." + middleName.charAt(0) + ".";
     }
 
     @Id

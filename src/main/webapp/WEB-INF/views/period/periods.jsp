@@ -5,6 +5,35 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <t:layout>
+    <ol class="breadcrumb">
+        <li>
+            <a href="/faculties"><spring:message code="label.univercity"/></a>
+        </li>
+        <li>
+            <a href="/faculties/${group.specialty.faculty.id}/specialties">
+                    ${group.specialty.faculty.name}
+            </a>
+        </li>
+        <li>
+            <a href="/specialties/${group.specialty.id}/groups">
+                    ${group.specialty.name}
+            </a>
+        </li>
+        <li>
+            <a href="/groups/${group.id}/create-subject-instance">
+                    ${group.name} (<spring:message code="label.curriculum"/>)
+            </a>
+        </li>
+        <li>
+            <a href="/groups/${group.id}/subject-instances?year=${param.year}&semester_number=${param.semester_number}">
+                    ${param.year} <spring:message code="label.semesterDateRange"/> ${param.semester_number}
+            </a>
+        </li>
+        <li class="active">
+                ${group.name} <spring:message code="label.lesson.schedule"/>
+        </li>
+    </ol>
+
     <sec:authorize access="hasRole('ROLE_ADMIN')">
         <div class="row">
             <div class="col-sm-6">
@@ -38,12 +67,17 @@
                                     </form:select>
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label for="periodNumber" class="control-label col-sm-4">Номер пари:</label>
-                                <div class="col-sm-8">
-                                    <form:input path="periodNumber" type="number" value="1" cssClass="form-control"/>
+                            <spring:bind path="periodNumber">
+                                <div class="form-group ${status.error ? 'has-error' : ''}">
+                                    <label for="periodNumber" class="control-label col-sm-4">Номер пари:</label>
+                                    <div class="col-sm-8">
+                                        <form:input path="periodNumber" type="number" value="1" cssClass="form-control"/>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <form:errors path="periodNumber" cssClass="text-danger"/>
+                                    </div>
                                 </div>
-                            </div>
+                            </spring:bind>
                             <div class="form-group">
                                 <label for="periodNumber" class="control-label col-sm-4">Аудеторія:</label>
                                 <div class="col-sm-8">

@@ -5,6 +5,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,14 +32,15 @@ public class SubjectController {
         return new Subject();
     }
 
-    @ModelAttribute("subjects")
-    public Page<Subject> subjects(Pageable pageable) {
-        return subjectRepository.findAll(pageable);
+    private void initModel(Model model, Pageable pageable) {
+        Page<Subject> subjects = subjectRepository.findAll(pageable);
+        model.addAttribute("subjects", subjects);
     }
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/subjects")
-    public String getSubjects() {
+    public String getSubjects(Model model, Pageable pageable) {
+        initModel(model, pageable);
         return "subject/subjects";
     }
 
@@ -46,9 +48,12 @@ public class SubjectController {
     @PostMapping("/subjects")
     public String postSubject(
             @ModelAttribute("subject") @Validated Subject subject,
-            BindingResult result
+            Model model,
+            BindingResult result,
+            Pageable pageable
     ) {
         if (result.hasErrors()) {
+            initModel(model, pageable);
             return "subject/subjects";
         }
         subjectRepository.save(subject);

@@ -1,6 +1,7 @@
 package ua.km.khnu.virtual.university.model;
 
 import org.springframework.format.annotation.DateTimeFormat;
+import ua.km.khnu.virtual.university.refrence.Semester;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -33,6 +34,11 @@ public class SubjectInstance {
 
     public SubjectInstance(LocalDate dateBegin) {
         this.dateBegin = dateBegin;
+    }
+
+    @Transient
+    public Semester getSemester(){
+        return new Semester(dateBegin);
     }
 
     @Id
@@ -110,4 +116,6 @@ public class SubjectInstance {
     public void setGroup(Group group) {
         this.group = group;
     }
+
+
 }

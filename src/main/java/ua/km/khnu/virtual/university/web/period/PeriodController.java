@@ -3,12 +3,14 @@ package ua.km.khnu.virtual.university.web.period;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import ua.km.khnu.virtual.university.model.Group;
 import ua.km.khnu.virtual.university.model.Period;
 import ua.km.khnu.virtual.university.model.TeacherSubjectInstance;
-import ua.km.khnu.virtual.university.refrence.Semester;
+import ua.km.khnu.virtual.university.refrence.SemesterDateRange;
 import ua.km.khnu.virtual.university.repositories.ClassroomRepository;
 import ua.km.khnu.virtual.university.repositories.GroupRepository;
 import ua.km.khnu.virtual.university.repositories.TeacherSubjectInstanceRepository;
@@ -58,16 +60,16 @@ public class PeriodController {
     }
 
     private void initModel(Model model, int groupId, int year, int semesterNumber) {
-        model.addAttribute("year",year);
+        model.addAttribute("year", year);
         model.addAttribute("semesterNumber", semesterNumber);
 
         List<Period> periods = periodService.periodsSchedule(groupId, year, semesterNumber);
         model.addAttribute("periods", periods);
         model.addAttribute("classrooms", classroomRepository.findAll());
 
-        Semester semester = new Semester(year, semesterNumber);
-        LocalDate dateBegin = semester.getDateBegin();
-        LocalDate dateEnd = semester.getDateEnd();
+        SemesterDateRange semesterDateRange = new SemesterDateRange(year, semesterNumber);
+        LocalDate dateBegin = semesterDateRange.getDateBegin();
+        LocalDate dateEnd = semesterDateRange.getDateEnd();
         List<TeacherSubjectInstance> tsi = teacherSubjectInstanceRepository.findByGroupAndSemester(groupId, dateBegin, dateEnd);
         model.addAttribute("teacherSubjectInstances", tsi);
     }
@@ -100,11 +102,18 @@ public class PeriodController {
 
     @PostMapping("/groups/{groupId}/periods")
     public String postPeriod(
-            @ModelAttribute("period") Period period,
+            @ModelAttribute("period") @Validated Period period,
+            BindingResult result,
             @ModelAttribute("year") int year,
             @ModelAttribute("semesterNumber") int semesterNumber,
-            RedirectAttributes attributes
+            Model model,
+            RedirectAttributes attributes,
+            @PathVariable int groupId
     ) {
+        if (result.hasErrors()) {
+            initModel(model, groupId, year, semesterNumber);
+            return "period/periods";
+        }
         periodService.save(period);
 
         attributes.addAttribute("year", year);
@@ -115,7 +124,7 @@ public class PeriodController {
 
     @PostMapping("/groups/{groupId}/edit-period/{periodId}")
     public String updatePeriod(
-            @ModelAttribute("period") Period period,
+            @ModelAttribute("periodToEdit") Period period,
             @ModelAttribute("year") int year,
             @ModelAttribute("semesterNumber") int semesterNumber,
             RedirectAttributes attributes

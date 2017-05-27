@@ -84,7 +84,6 @@
         <div class="row">
             <div class="col-sm-2 col-centered">
                 <ul class="pagination">
-                    <c:set value="${subjects.totalPages-1}" var="maxPage"/>
                     <li><a href="/classrooms?page=0">&laquo;</a></li>
                     <c:forEach var="current" begin="0" end="${maxPage}">
                         <li><a href="/classrooms?page=${current}">${current+1}</a></li>

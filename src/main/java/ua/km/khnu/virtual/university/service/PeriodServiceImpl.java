@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ua.km.khnu.virtual.university.model.Period;
-import ua.km.khnu.virtual.university.refrence.Semester;
+import ua.km.khnu.virtual.university.refrence.SemesterDateRange;
 import ua.km.khnu.virtual.university.repositories.GroupRepository;
 import ua.km.khnu.virtual.university.repositories.PeriodRepository;
 
@@ -39,9 +39,9 @@ public class PeriodServiceImpl implements PeriodService {
 
     @Override
     public List<Period> periodsSchedule(int groupId, int year, int semesterNumber) {
-        Semester semester = new Semester(year, semesterNumber);
-        LocalDate dateBegin = semester.getDateBegin();
-        LocalDate dateEnd = semester.getDateEnd();
+        SemesterDateRange semesterDateRange = new SemesterDateRange(year, semesterNumber);
+        LocalDate dateBegin = semesterDateRange.getDateBegin();
+        LocalDate dateEnd = semesterDateRange.getDateEnd();
         return periodRepository.findByGroupAndSemester(groupId, dateBegin, dateEnd);
     }
 

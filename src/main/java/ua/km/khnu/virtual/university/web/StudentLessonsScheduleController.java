@@ -6,9 +6,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import ua.km.khnu.virtual.university.model.Student;
+import ua.km.khnu.virtual.university.refrence.Semester;
 import ua.km.khnu.virtual.university.repositories.StudentRepository;
 import ua.km.khnu.virtual.university.service.SubjectInstanceService;
-import ua.km.khnu.virtual.university.transfare.SemesterDto;
 import ua.km.khnu.virtual.university.util.SecurityUtils;
 
 import java.util.List;
@@ -36,7 +36,7 @@ public class StudentLessonsScheduleController {
         Student student = studentRepository.findByAccountUsername(login);
         Integer groupId = student.getGroup().getId();
 
-        List<SemesterDto> semesters = subjectInstanceService.getSemesters(groupId);
+        List<Semester> semesters = subjectInstanceService.getSemesters(groupId);
         model.addAttribute("semesters", semesters);
         model.addAttribute("groupId", groupId);
 

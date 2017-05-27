@@ -6,21 +6,37 @@ import java.time.LocalDate;
  * @author Igor Rybak
  */
 public class Semester {
-    private final int mouthBegin;
-    private final int mouthEnd;
     private final int year;
+    private final int semesterNumber;
 
-    public Semester(int year, int semesterNumber) {
-        this.year = year;
-        mouthBegin = semesterNumber == 1 ? 9 : 1;//january or september
-        mouthEnd = semesterNumber == 1 ? 12 : 8;//december or august
+    public Semester(LocalDate dateBegin) {
+        year = dateBegin.getYear();
+        semesterNumber = dateBegin.getMonth().getValue() > 6 ? 1 : 2;
     }
 
-    public LocalDate getDateBegin() {
-        return LocalDate.of(year, mouthBegin, 1);
+    public int getYear() {
+        return year;
     }
 
-    public LocalDate getDateEnd() {
-        return LocalDate.of(year, mouthEnd, 31);
+    public int getSemesterNumber() {
+        return semesterNumber;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Semester semester = (Semester) o;
+
+        if (year != semester.year) return false;
+        return semesterNumber == semester.semesterNumber;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = year;
+        result = 31 * result + semesterNumber;
+        return result;
     }
 }

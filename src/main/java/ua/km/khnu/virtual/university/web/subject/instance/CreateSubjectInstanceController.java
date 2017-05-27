@@ -10,11 +10,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import ua.km.khnu.virtual.university.model.Group;
 import ua.km.khnu.virtual.university.model.Subject;
 import ua.km.khnu.virtual.university.model.SubjectInstance;
+import ua.km.khnu.virtual.university.refrence.Semester;
+import ua.km.khnu.virtual.university.repositories.GroupRepository;
 import ua.km.khnu.virtual.university.repositories.SubjectRepository;
 import ua.km.khnu.virtual.university.service.SubjectInstanceService;
-import ua.km.khnu.virtual.university.transfare.SemesterDto;
 
 import java.util.List;
 
@@ -25,11 +27,13 @@ import java.util.List;
 public class CreateSubjectInstanceController {
     private final SubjectRepository subjectRepository;
     private final SubjectInstanceService subjectInstanceService;
+    private final GroupRepository groupRepository;
 
     @Autowired
-    public CreateSubjectInstanceController(SubjectInstanceService subjectInstanceService, SubjectRepository subjectRepository) {
+    public CreateSubjectInstanceController(SubjectInstanceService subjectInstanceService, SubjectRepository subjectRepository, GroupRepository groupRepository) {
         this.subjectInstanceService = subjectInstanceService;
         this.subjectRepository = subjectRepository;
+        this.groupRepository = groupRepository;
     }
 
     @ModelAttribute("groupId")
@@ -43,10 +47,12 @@ public class CreateSubjectInstanceController {
     }
 
     private void initModel(Model model, int groupId) {
-        List<SemesterDto> semesters = subjectInstanceService.getSemesters(groupId);
+        List<Semester> semesters = subjectInstanceService.getSemesters(groupId);
         model.addAttribute("semesters", semesters);
         List<Subject> subjects = subjectRepository.findAll();
         model.addAttribute("subjects", subjects);
+        Group group = groupRepository.findOne(groupId);
+        model.addAttribute("group", group);
     }
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
@@ -73,6 +79,6 @@ public class CreateSubjectInstanceController {
         }
         int subjectId = subjectInstance.getSubject().getId();
         subjectInstanceService.create(subjectInstance, groupId, subjectId);
-        return "redirect:/groups/" + groupId + "/create-subject-instance";
+        return "redirect:/groups/{groupId}/create-subject-instance";
     }
 }

@@ -10,8 +10,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import ua.km.khnu.virtual.university.model.SubjectInstance;
 import ua.km.khnu.virtual.university.model.TeacherSubjectInstance;
+import ua.km.khnu.virtual.university.refrence.Semester;
 import ua.km.khnu.virtual.university.repositories.TeacherRepository;
 import ua.km.khnu.virtual.university.repositories.TeacherSubjectInstanceRepository;
+import ua.km.khnu.virtual.university.service.SubjectInstanceService;
 
 import java.util.List;
 
@@ -22,17 +24,15 @@ import java.util.List;
 public class TeacherSubjectInstanceController {
     private final TeacherRepository teacherRepository;
     private final TeacherSubjectInstanceRepository teacherSubjectInstanceRepository;
+    private final SubjectInstanceService subjectInstanceService;
 
     @Autowired
-    public TeacherSubjectInstanceController(TeacherSubjectInstanceRepository teacherSubjectInstanceRepository, TeacherRepository teacherRepository) {
+    public TeacherSubjectInstanceController(TeacherSubjectInstanceRepository teacherSubjectInstanceRepository, TeacherRepository teacherRepository, SubjectInstanceService subjectInstanceService) {
         this.teacherSubjectInstanceRepository = teacherSubjectInstanceRepository;
         this.teacherRepository = teacherRepository;
+        this.subjectInstanceService = subjectInstanceService;
     }
 
-    @ModelAttribute("subjectInstanceId")
-    public int subjectInstanceId(@PathVariable int subjectInstanceId) {
-        return subjectInstanceId;
-    }
 
     @ModelAttribute("teacherSubjectInstance")
     public TeacherSubjectInstance teacherSubjectInstance() {
@@ -43,6 +43,8 @@ public class TeacherSubjectInstanceController {
         List<TeacherSubjectInstance> teacherSubjectInstances = teacherSubjectInstanceRepository.findBySubjectInstanceId(subjectInstanceId);
         model.addAttribute("teacherSubjectInstances", teacherSubjectInstances);
         model.addAttribute("teachers", teacherRepository.findAll());
+        SubjectInstance subjectInstance= subjectInstanceService.get(subjectInstanceId);
+        model.addAttribute(subjectInstance);
     }
 
     @GetMapping("/subject-instances/{subjectInstanceId}/teacher-subject-instances")
@@ -72,10 +74,9 @@ public class TeacherSubjectInstanceController {
 
     @GetMapping("/subject-instances/{subjectInstanceId}/delete-teacher-subject-instance/{teacherSubjectInstanceId}")
     public String deleteTeacherSubjectInstance(
-            @PathVariable int subjectInstanceId,
             @PathVariable int teacherSubjectInstanceId
     ) {
         teacherSubjectInstanceRepository.delete(teacherSubjectInstanceId);
-        return "redirect:/subject-instances/" + subjectInstanceId + "/teacher-subject-instances";
+        return "redirect:/subject-instances/{subjectInstanceId}/teacher-subject-instances";
     }
 }

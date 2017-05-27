@@ -20,7 +20,7 @@
                             </label>
                             <div class="col-sm-8">
                                 <form:select path="teacher" type="text" class="form-control">
-                                    <form:options items="${teachers}" itemLabel="account.firstName"/>
+                                    <form:options items="${teachers}" itemLabel="account.fullName"/>
                                 </form:select>
                             </div>
                         </div>
@@ -30,8 +30,9 @@
                             </label>
                             <div class="col-sm-8">
                                 <form:select path="periodType" type="text" class="form-control">
-                                    <form:option value="лекції">лекції</form:option>
-                                    <form:option value="лабораторні">лабораторні</form:option>
+                                    <form:option value="лекція">лекція</form:option>
+                                    <form:option value="лабораторна робота">лабораторна робота</form:option>
+                                    <form:option value="практичне заняття">практичне заняття</form:option>
                                 </form:select>
                             </div>
                         </div>

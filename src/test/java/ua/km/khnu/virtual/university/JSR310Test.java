@@ -1,6 +1,7 @@
 package ua.km.khnu.virtual.university;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
@@ -14,6 +15,7 @@ import static org.junit.Assert.assertEquals;
  * @author Igor Rybak
  */
 @RunWith(JUnit4.class)
+@Ignore
 public class JSR310Test {
 
     @Test

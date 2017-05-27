@@ -10,11 +10,10 @@ import ua.km.khnu.virtual.university.model.Group;
 import ua.km.khnu.virtual.university.model.Subject;
 import ua.km.khnu.virtual.university.model.SubjectInstance;
 import ua.km.khnu.virtual.university.refrence.Semester;
+import ua.km.khnu.virtual.university.refrence.SemesterDateRange;
 import ua.km.khnu.virtual.university.repositories.GroupRepository;
-import ua.km.khnu.virtual.university.repositories.StudentRepository;
 import ua.km.khnu.virtual.university.repositories.SubjectInstanceRepository;
 import ua.km.khnu.virtual.university.repositories.SubjectRepository;
-import ua.km.khnu.virtual.university.transfare.SemesterDto;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -28,21 +27,19 @@ import static ua.km.khnu.virtual.university.util.EntityUtils.retrieveOneOrThrowN
 @Service
 @Transactional
 public class SubjectInstanceServiceImpl implements SubjectInstanceService {
-    private SubjectInstanceRepository subjectInstanceRepository;
-    private SubjectRepository subjectRepository;
-    private GroupRepository groupRepository;
-    private final StudentRepository studentRepository;
+    private final SubjectInstanceRepository subjectInstanceRepository;
+    private final SubjectRepository subjectRepository;
+    private final GroupRepository groupRepository;
 
     @Autowired
     public SubjectInstanceServiceImpl(
             SubjectInstanceRepository subjectInstanceRepository,
             SubjectRepository subjectRepository,
-            GroupRepository groupRepository,
-            StudentRepository studentRepository) {
+            GroupRepository groupRepository
+    ) {
         this.subjectInstanceRepository = subjectInstanceRepository;
         this.subjectRepository = subjectRepository;
         this.groupRepository = groupRepository;
-        this.studentRepository = studentRepository;
     }
 
 
@@ -69,20 +66,12 @@ public class SubjectInstanceServiceImpl implements SubjectInstanceService {
         return null;
     }
 
-    private SemesterDto mapToSemesterDto(SubjectInstance subjectInstance) {
-        SemesterDto semesterDto = new SemesterDto();
-        semesterDto.setYear(subjectInstance.getDateBegin().getYear());
-        int number = subjectInstance.getDateBegin().getMonth().getValue() > 6 ? 1 : 2;
-        semesterDto.setSemesterNumber(number);
-        return semesterDto;
-    }
-
     @Override
-    public List<SemesterDto> getSemesters(int groupId) {
+    public List<Semester> getSemesters(int groupId) {
         Sort dateBegin = new Sort(new Sort.Order(Sort.Direction.DESC, "dateBegin"));
         return subjectInstanceRepository.findByGroupId(groupId, dateBegin)
                 .stream()
-                .map(this::mapToSemesterDto)
+                .map(SubjectInstance::getSemester)
                 .distinct()
                 .collect(Collectors.toList());
     }
@@ -94,15 +83,14 @@ public class SubjectInstanceServiceImpl implements SubjectInstanceService {
 
     @Override
     public List<SubjectInstance> getBySemester(int groupId, int year, int semesterNumber) {
-        Semester semester = new Semester(year, semesterNumber);
-        LocalDate dateBegin = semester.getDateBegin();
-        LocalDate dateEnd = semester.getDateEnd();
+        SemesterDateRange semesterDateRange = new SemesterDateRange(year, semesterNumber);
+        LocalDate dateBegin = semesterDateRange.getDateBegin();
+        LocalDate dateEnd = semesterDateRange.getDateEnd();
         return subjectInstanceRepository.findByGroupAndSemester(groupId, dateBegin, dateEnd);
     }
 
     @Override
-    public List<SemesterDto> getSemestersOfCurrentStudent() {
-
-        return null;
+    public SubjectInstance get(int subjectInstanceId) {
+        return subjectInstanceRepository.findOne(subjectInstanceId);
     }
 }

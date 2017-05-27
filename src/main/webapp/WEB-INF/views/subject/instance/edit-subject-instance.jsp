@@ -13,30 +13,29 @@
                     <form:form modelAttribute="subjectInstance" action="/edit-subject-instance/${subjectInstance.id}"
                                method="post" class="form-horizontal"
                                role="form">
-                        <spring:bind path="controlType">
-                            <div class="form-group ${status.error ? 'has-error' : ''}">
-                                <div class="col-sm-12">
-                                    <spring:message code="label.control.type" var="controlType"/>
-                                    <form:input path="controlType" type="text" class="form-control"
-                                                placeholder="${controlType}"/>
-                                </div>
-                                <div class="col-sm-12">
-                                    <form:errors path="controlType" cssClass="text-danger"/>
-                                </div>
+                        <div class="form-group">
+                            <label for="controlType" class="control-label col-sm-4"><spring:message
+                                    code="label.control.type"/></label>
+                            <div class="col-sm-8">
+                                <form:select path="controlType" class="form-control">
+                                    <form:option value="екзамен">екзамен</form:option>
+                                    <form:option value="курсовий проект">курсовий проект</form:option>
+                                    <form:option value="залік">залік</form:option>
+                                </form:select>
                             </div>
-                        </spring:bind>
-                        <spring:bind path="subjectType">
-                            <div class="form-group ${status.error ? 'has-error' : ''}">
-                                <div class="col-sm-12">
-                                    <spring:message code="label.subject.type" var="subjectType"/>
-                                    <form:input path="subjectType" type="text" class="form-control"
-                                                placeholder="${subjectType}"/>
-                                </div>
-                                <div class="col-sm-12">
-                                    <form:errors path="subjectType" cssClass="text-danger"/>
-                                </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="subjectType" class="control-label col-sm-4">
+                                <spring:message code="label.subject.type"/>
+                            </label>
+                            <div class="col-sm-8">
+                                <form:select path="subjectType" class="form-control">
+                                    <form:option value="Звичайна">Звичайна</form:option>
+                                    <form:option value="Факультатив">Факультатив</form:option>
+                                    <form:option value="Секція">Секція</form:option>
+                                </form:select>
                             </div>
-                        </spring:bind>
+                        </div>
                         <spring:bind path="dateBegin">
                             <div class="form-group ${status.error ? 'has-error' : ''}">
                                 <div class="col-sm-12">

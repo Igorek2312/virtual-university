@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -48,16 +49,25 @@ public class TeacherController {
     }
 
     @GetMapping("/teachers")
-    public String getTeachers() {
+    public String getTeachers(Model model, Pageable pageable) {
+        initModel(model, pageable);
         return "teacher/teachers";
+    }
+
+    private void initModel(Model model, Pageable pageable) {
+        Page<Teacher> teachers = teacherRepository.findAll(pageable);
+        model.addAttribute("teachers", teachers);
     }
 
     @PostMapping("/teachers")
     public String postTeacher(
             @ModelAttribute("teacher") @Validated Teacher teacher,
-            BindingResult result
+            Model model,
+            BindingResult result,
+            Pageable pageable
     ) {
         if (result.hasErrors()) {
+            initModel(model, pageable);
             return "teacher/teachers";
         }
         Role role = roleRepository.findByName("ROLE_STUDENT");

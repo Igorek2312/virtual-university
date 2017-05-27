@@ -24,7 +24,7 @@ public interface PeriodRepository extends JpaRepository<Period, Integer> {
             "p.teacherSubjectInstance.subjectInstance.dateBegin >= :dateBegin and " +
             "p.teacherSubjectInstance.subjectInstance.dateEnd <= :dateEnd and " +
             "p.teacherSubjectInstance.subjectInstance.group.id = :groupId " +
-            "order by p.dayOfWeek, p.periodNumber"
+            "order by p.dayOfWeek, p.periodNumber, p.oddEven desc"
     )
     List<Period> findByGroupAndSemester(
             @Param("groupId") int groupId,

@@ -101,12 +101,12 @@
                             <spring:message code="label.students"/>
                         </a>
                     </td>
+                    <td>
+                        <a href="/groups/${group.id}/create-subject-instance">
+                            <spring:message code="label.curriculum"/>
+                        </a>
+                    </td>
                     <sec:authorize access="hasRole('ROLE_ADMIN')">
-                        <td>
-                            <a href="/groups/${group.id}/create-subject-instance">
-                                <spring:message code="label.curriculum"/>
-                            </a>
-                        </td>
                         <td>
                             <a href="/edit-group/${group.id}">
                                 <button class="btn btn-primary">

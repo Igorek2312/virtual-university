@@ -45,14 +45,7 @@ public class StudentController {
 
     @ModelAttribute("student")
     public Student student(@PathVariable int groupId) {
-        Group group = retrieveOneOrThrowNotFound(groupRepository::findOne, groupId, Group.class);
-        Student student = new Student();
-        student.setGroup(group);
-        Role role = roleRepository.findByName("ROLE_STUDENT");
-        Account account = new Account();
-        account.getRoles().add(role);
-        student.setAccount(account);
-        return student;
+        return new Student();
     }
 
     @ModelAttribute("students")
@@ -75,6 +68,13 @@ public class StudentController {
         if (result.hasErrors()) {
             return "student/students";
         }
+
+        Group group = retrieveOneOrThrowNotFound(groupRepository::findOne, groupId, Group.class);
+        student.setGroup(group);
+        Role role = roleRepository.findByName("ROLE_STUDENT");
+        Account account = new Account();
+        account.getRoles().add(role);
+        student.setAccount(account);
 
         studentRepository.save(student);
         return "redirect:/groups/" + groupId + "/students";

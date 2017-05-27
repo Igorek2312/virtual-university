@@ -8,7 +8,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
+import ua.km.khnu.virtual.university.model.Group;
 import ua.km.khnu.virtual.university.model.SubjectInstance;
+import ua.km.khnu.virtual.university.repositories.GroupRepository;
 import ua.km.khnu.virtual.university.service.SubjectInstanceService;
 
 import java.util.List;
@@ -19,15 +21,12 @@ import java.util.List;
 @Controller
 public class SubjectInstanceController {
     private final SubjectInstanceService subjectInstanceService;
+    private final GroupRepository groupRepository;
 
     @Autowired
-    public SubjectInstanceController(SubjectInstanceService subjectInstanceService) {
+    public SubjectInstanceController(SubjectInstanceService subjectInstanceService, GroupRepository groupRepository) {
         this.subjectInstanceService = subjectInstanceService;
-    }
-
-    @ModelAttribute("groupId")
-    public int groupId(@PathVariable int groupId) {
-        return groupId;
+        this.groupRepository = groupRepository;
     }
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
@@ -40,19 +39,17 @@ public class SubjectInstanceController {
     ) {
         List<SubjectInstance> subjectInstances = subjectInstanceService.getBySemester(groupId, year, semesterNumber);
         model.addAttribute("subjectInstances", subjectInstances);
+        Group group = groupRepository.findOne(groupId);
+        model.addAttribute("group", group);
         return "subject/instance/subject-instances-of-group";
     }
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/groups/{groupId}/delete-subject-instance/{subjectInstanceId}")
     public String deleteSubjectInstance(
-            @PathVariable int subjectInstanceId,
-            @PathVariable int groupId
+            @PathVariable int subjectInstanceId
     ) {
         subjectInstanceService.delete(subjectInstanceId);
-        return "redirect:/groups/" + groupId + "/create-subject-instance";
+        return "redirect:/groups/{groupId}/create-subject-instance";
     }
-
-
-
 }
