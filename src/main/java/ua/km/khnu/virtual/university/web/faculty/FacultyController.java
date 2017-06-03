@@ -3,6 +3,7 @@ package ua.km.khnu.virtual.university.web.faculty;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -40,13 +41,16 @@ public class FacultyController {
         return retrieveOneOrThrowNotFound(facultyRepository::findOne, facultyId, Faculty.class);
     }
 
-    @ModelAttribute("faculties")
-    public List<Faculty> faculties() {
-        return facultyRepository.findAll();
+    private void initModel(Model model) {
+        List<Faculty> faculties = facultyRepository.findAll();
+        model.addAttribute("faculties",faculties);
     }
 
     @GetMapping("/faculties")
-    public String getFaculties() {
+    public String getFaculties(
+            Model model
+    ) {
+        initModel(model);
         return "faculty/faculties";
     }
 
@@ -54,9 +58,11 @@ public class FacultyController {
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     public String postFaculty(
             @ModelAttribute("faculty") @Validated Faculty faculty,
-            BindingResult result
+            BindingResult result,
+            Model model
     ) {
         if (result.hasErrors()) {
+            initModel(model);
             return "faculty/faculties";
         }
         facultyRepository.save(faculty);

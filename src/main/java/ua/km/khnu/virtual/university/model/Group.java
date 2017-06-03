@@ -18,7 +18,6 @@ public class Group {
     @NotBlank
     @Length(min = 5,max = 10)
     private String name;
-    @Range(min = 1900,max = 3000)
     private int yearEntered;
     @Range(min = 1,max = 6)
     private int yearOfStudyEntered;

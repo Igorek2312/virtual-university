@@ -62,11 +62,6 @@ public class SubjectInstanceServiceImpl implements SubjectInstanceService {
     }
 
     @Override
-    public Page<SubjectInstance> getByGroupAndSemester(Pageable pageable, int year, int semester) {
-        return null;
-    }
-
-    @Override
     public List<Semester> getSemesters(int groupId) {
         Sort dateBegin = new Sort(new Sort.Order(Sort.Direction.DESC, "dateBegin"));
         return subjectInstanceRepository.findByGroupId(groupId, dateBegin)

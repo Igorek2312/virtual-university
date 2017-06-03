@@ -15,8 +15,6 @@ public interface SubjectInstanceService {
 
     SubjectInstance create(SubjectInstance subjectInstance, int groupId, int subjectId);
 
-    Page<SubjectInstance> getByGroupAndSemester(Pageable pageable, int year, int semester);
-
     List<Semester> getSemesters(int groupId);
 
     void delete(int subjectInstanceId);

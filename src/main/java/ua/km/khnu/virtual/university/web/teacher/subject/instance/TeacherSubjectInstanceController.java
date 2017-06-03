@@ -59,8 +59,8 @@ public class TeacherSubjectInstanceController {
     @PostMapping("/subject-instances/{subjectInstanceId}/teacher-subject-instances")
     public String postTeacherSubjectInstance(
             @ModelAttribute("teacherSubjectInstance") TeacherSubjectInstance teacherSubjectInstance,
-            Model model,
             BindingResult result,
+            Model model,
             @PathVariable int subjectInstanceId
     ) {
         if (result.hasErrors()) {

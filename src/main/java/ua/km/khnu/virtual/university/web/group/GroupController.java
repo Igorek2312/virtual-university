@@ -4,7 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -48,27 +50,36 @@ public class GroupController {
         return retrieveOneOrThrowNotFound(specialtyRepository::findOne, specialtyId, Specialty.class);
     }
 
-    @ModelAttribute("groups")
-    public List<Group> groups(@PathVariable int specialtyId, Sort sort) {
-        return groupRepository.findBySpecialtyId(specialtyId, sort);
+    private void initModel(@PathVariable int specialtyId, Sort sort, Model model) {
+        List<Group> groups = groupRepository.findBySpecialtyId(specialtyId, sort);
+        model.addAttribute("groups",groups);
     }
 
     @GetMapping("/specialties/{specialtyId}/groups")
-    public String getGroupsBySpecialty() {
+    public String getGroupsBySpecialty(
+            @PathVariable int specialtyId,
+            Sort sort,
+            Model model
+    ) {
+        initModel(specialtyId, sort, model);
         return "group/groups";
     }
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping("/specialties/{specialtyId}/groups")
     public String postGroup(
-            @ModelAttribute("group") Group group,
-            BindingResult result
+            @ModelAttribute("group") @Validated Group group,
+            BindingResult result,
+            @PathVariable int specialtyId,
+            Sort sort,
+            Model model
     ) {
         if (result.hasErrors()) {
+            initModel(specialtyId, sort, model);
             return "group/groups";
         }
         groupRepository.save(group);
-        return "redirect:/specialties/" + group.getSpecialty().getId() + "/groups";
+        return "redirect:/specialties/{specialtyId}/groups";
     }
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
@@ -78,9 +89,8 @@ public class GroupController {
             @PathVariable int groupId
     ) {
         groupRepository.delete(groupId);
-        return "redirect:/specialties/" + specialtyId + "/groups";
+        return "redirect:/specialties/{specialtyId}/groups";
     }
-
 
 
 }

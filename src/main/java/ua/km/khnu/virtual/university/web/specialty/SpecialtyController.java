@@ -3,6 +3,7 @@ package ua.km.khnu.virtual.university.web.specialty;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -45,13 +46,17 @@ public class SpecialtyController {
         return retrieveOneOrThrowNotFound(facultyRepository::findOne, facultyId, Faculty.class);
     }
 
-    @ModelAttribute("specialties")
-    public List<Specialty> specialties(@PathVariable int facultyId) {
-        return specialtyRepository.findByFacultyId(facultyId);
+    private void initModel(int facultyId, Model model) {
+        List<Specialty> specialties = specialtyRepository.findByFacultyId(facultyId);
+        model.addAttribute("specialties", specialties);
     }
 
     @GetMapping("/faculties/{facultyId}/specialties")
-    public String getSpecialtiesByFaculty() {
+    public String getSpecialtiesByFaculty(
+            @PathVariable int facultyId,
+            Model model
+    ) {
+        initModel(facultyId, model);
         return "specialty/specialties";
     }
 
@@ -59,9 +64,12 @@ public class SpecialtyController {
     @PostMapping("/faculties/{facultyId}/specialties")
     public String postSpecialty(
             @ModelAttribute("specialty") @Validated Specialty specialty,
-            BindingResult result
+            BindingResult result,
+            @PathVariable int facultyId,
+            Model model
     ) {
         if (result.hasErrors()) {
+            initModel(facultyId, model);
             return "specialty/specialties";
         }
         specialtyRepository.save(specialty);

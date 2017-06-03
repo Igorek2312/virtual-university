@@ -22,4 +22,7 @@ public interface SubjectInstanceRepository extends JpaRepository<SubjectInstance
             @Param("dateBegin") LocalDate dateBegin,
             @Param("dateEnd") LocalDate dateEnd
     );
+
+    @Query("select year(s.dateBegin), case when (month(s.dateBegin)>8) then 1 else 2 end from SubjectInstance s")
+    List<Object[]> findSemesters();
 }

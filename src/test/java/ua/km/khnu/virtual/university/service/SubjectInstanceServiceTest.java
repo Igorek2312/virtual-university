@@ -45,6 +45,7 @@ public class SubjectInstanceServiceTest {
         SubjectInstance subjectInstance3 = new SubjectInstance(LocalDate.of(2017, 2, 5));
         List<SubjectInstance> subjectInstances = Arrays.asList(subjectInstance3, subjectInstance2, subjectInstance1);
         when(subjectInstanceRepository.findByGroupId(anyInt(), any(Sort.class))).thenReturn(subjectInstances);
+
         List<Semester> semesters = subjectInstanceService.getSemesters(1);
 
         assertThat(semesters)
@@ -56,5 +57,4 @@ public class SubjectInstanceServiceTest {
                 .containsExactly(2, 1);
 
     }
-
 }

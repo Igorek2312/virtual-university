@@ -11,37 +11,39 @@
         </li>
     </ol>
 
-    <div class="row">
-        <div class="col-sm-2">
-            <div class="panel panel-default">
-                <div class="panel-body">
-                    <a href="/classrooms">
-                        <i class="fa fa-folder"></i> <spring:message code="label.classrooms"/>
-                    </a>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-2">
-            <div class="panel panel-default">
-                <div class="panel-body">
-                    <a href="/subjects">
-                        <i class="fa fa-folder"></i> <spring:message code="label.subjects"/>
-                    </a>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-2">
-            <div class="panel panel-default">
-                <div class="panel-body">
-                    <a href="/teachers">
-                        <i class="fa fa-folder"></i> <spring:message code="label.teachers"/>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
+
 
     <sec:authorize access="hasRole('ROLE_ADMIN')">
+        <div class="row">
+            <div class="col-sm-2">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <a href="/classrooms">
+                            <i class="fa fa-folder"></i> <spring:message code="label.classrooms"/>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-2">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <a href="/subjects">
+                            <i class="fa fa-folder"></i> <spring:message code="label.subjects"/>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-2">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <a href="/teachers">
+                            <i class="fa fa-folder"></i> <spring:message code="label.teachers"/>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class="row">
             <div class="col-sm-6">
                 <div class="panel panel-default">

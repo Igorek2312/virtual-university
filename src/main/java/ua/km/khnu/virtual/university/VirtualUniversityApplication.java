@@ -10,15 +10,16 @@ import org.springframework.context.annotation.PropertySource;
 import java.util.TimeZone;
 
 @SpringBootApplication
-@PropertySource(
+/*@PropertySource(
         value = "classpath:application-${spring.profiles.active}.properties",
         ignoreResourceNotFound = true
-)
+)*/
 @EntityScan(basePackages = {
         "ua.km.khnu.virtual.university.model",
         "org.springframework.data.jpa.convert.threeten"
 })
 public class VirtualUniversityApplication extends SpringBootServletInitializer {
+
     @Override
     protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
         return builder.sources(VirtualUniversityApplication.class);

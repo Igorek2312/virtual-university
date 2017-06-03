@@ -6,6 +6,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -33,14 +34,18 @@ public class ClassroomController {
         return classroom;
     }
 
-    @ModelAttribute("classrooms")
-    public Page<Classroom> classrooms(@PageableDefault(size = 5)  Pageable pageable) {
-        return classroomRepository.findAll(pageable);
+    private void initModel(Model model, Pageable pageable) {
+        Page<Classroom> classrooms = classroomRepository.findAll(pageable);
+        model.addAttribute("classrooms", classrooms);
     }
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/classrooms")
-    public String getClassrooms() {
+    public String getClassrooms(
+            Model model,
+            @PageableDefault(size = 5) Pageable pageable
+    ) {
+        initModel(model, pageable);
         return "classroom/classrooms";
     }
 
@@ -48,9 +53,12 @@ public class ClassroomController {
     @PostMapping("/classrooms")
     public String postClassroom(
             @ModelAttribute("classroom") Classroom classroom,
-            BindingResult result
+            BindingResult result,
+            @PageableDefault(size = 5) Pageable pageable,
+            Model model
     ) {
         if (result.hasErrors()) {
+            initModel(model, pageable);
             return "classroom/classrooms";
         }
         classroomRepository.save(classroom);

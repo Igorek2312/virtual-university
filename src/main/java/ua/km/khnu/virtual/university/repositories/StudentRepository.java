@@ -15,8 +15,6 @@ import java.util.Optional;
 public interface StudentRepository extends JpaRepository<Student, Integer> {
     List<Student> findByGroupId(int groupId, Sort sort);
 
-    Page<Student> findByGroupName(String groupName, Pageable pageable);
-
     Optional<Student> findByAccountId(int accountId);
 
     Student findByAccountUsername(String username);

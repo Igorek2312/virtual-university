@@ -15,7 +15,7 @@ public class Period {
     @Range(min = 1,max = 6)
     private byte dayOfWeek;
     private OddEvenWeek oddEven;
-    @Range(min = 1,max = 10)
+    @Range(min = 1,max = 8)
     private byte periodNumber;
     private Classroom classroom;
     private TeacherSubjectInstance teacherSubjectInstance;

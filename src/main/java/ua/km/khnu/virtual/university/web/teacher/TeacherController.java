@@ -43,11 +43,6 @@ public class TeacherController {
         return teacher;
     }
 
-    @ModelAttribute("teachers")
-    public Page<Teacher> teachers(Pageable pageable) {
-        return teacherRepository.findAll(pageable);
-    }
-
     @GetMapping("/teachers")
     public String getTeachers(Model model, Pageable pageable) {
         initModel(model, pageable);
@@ -62,8 +57,8 @@ public class TeacherController {
     @PostMapping("/teachers")
     public String postTeacher(
             @ModelAttribute("teacher") @Validated Teacher teacher,
-            Model model,
             BindingResult result,
+            Model model,
             Pageable pageable
     ) {
         if (result.hasErrors()) {

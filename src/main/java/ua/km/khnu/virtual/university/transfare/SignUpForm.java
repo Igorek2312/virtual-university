@@ -1,6 +1,7 @@
 package ua.km.khnu.virtual.university.transfare;
 
 import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.NotEmpty;
 import ua.km.khnu.virtual.university.service.validation.AccountWithSuchDocumentNumberExists;
 import ua.km.khnu.virtual.university.service.validation.AccountWithSuchDocumentNumberIsDisabled;
@@ -9,15 +10,16 @@ import ua.km.khnu.virtual.university.service.validation.AccountWithSuchDocumentN
  * @author Igor Rybak
  */
 public class SignUpForm {
-    @NotEmpty
+    @NotBlank
     @Length(min = 5, max = 20)
     private String username;
-    @NotEmpty
+    @NotBlank
     @Length(min = 5, max = 20)
     private String password;
 
     @AccountWithSuchDocumentNumberExists
     @AccountWithSuchDocumentNumberIsDisabled
+    @NotBlank
     private String documentNumber;
 
     public String getUsername() {
