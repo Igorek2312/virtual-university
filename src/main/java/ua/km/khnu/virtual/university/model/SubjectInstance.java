@@ -1,6 +1,11 @@
 package ua.km.khnu.virtual.university.model;
 
+import org.springframework.format.annotation.DateTimeFormat;
+import ua.km.khnu.virtual.university.refrence.Semester;
+
 import javax.persistence.*;
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
 /**
@@ -12,9 +17,13 @@ public class SubjectInstance {
     private Integer id;
     private String controlType;
     private String subjectType;
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate dateBegin;
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate dateEnd;
     private int hours;
+    @NotNull
+    @Valid
     private Subject subject;
     private Group group;
 
@@ -23,6 +32,15 @@ public class SubjectInstance {
 
     public SubjectInstance(Integer id) {
         this.id = id;
+    }
+
+    public SubjectInstance(LocalDate dateBegin) {
+        this.dateBegin = dateBegin;
+    }
+
+    @Transient
+    public Semester getSemester(){
+        return new Semester(dateBegin);
     }
 
     @Id
@@ -36,7 +54,7 @@ public class SubjectInstance {
         this.id = id;
     }
 
-    @Column(name = "control_type",nullable = false)
+    @Column(name = "control_type", nullable = false)
     public String getControlType() {
         return controlType;
     }
@@ -45,7 +63,7 @@ public class SubjectInstance {
         this.controlType = controllType;
     }
 
-    @Column(name = "subject_type",nullable = false)
+    @Column(name = "subject_type", nullable = false)
     public String getSubjectType() {
         return subjectType;
     }
@@ -72,7 +90,7 @@ public class SubjectInstance {
         this.dateEnd = dateFinish;
     }
 
-    @Column(name = "hours",nullable = false)
+    @Column(name = "hours", nullable = false)
     public int getHours() {
         return hours;
     }
@@ -100,4 +118,6 @@ public class SubjectInstance {
     public void setGroup(Group group) {
         this.group = group;
     }
+
+
 }

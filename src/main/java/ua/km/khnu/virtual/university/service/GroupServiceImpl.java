@@ -40,7 +40,7 @@ public class GroupServiceImpl implements GroupService {
 
     private Group mapToGroup(GroupForm groupForm) {
         Group group = modelMapper.map(groupForm, Group.class);
-        group.setYearEntered(Year.of(groupForm.getYearEntered()));
+        group.setYearEntered(groupForm.getYearEntered());
         return group;
     }
 

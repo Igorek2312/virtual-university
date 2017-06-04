@@ -1,10 +1,10 @@
 package ua.km.khnu.virtual.university.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.validator.constraints.Range;
 import ua.km.khnu.virtual.university.refrence.OddEvenWeek;
 
 import javax.persistence.*;
-import java.time.DayOfWeek;
 
 /**
  * @author Igor Rybak
@@ -12,8 +12,10 @@ import java.time.DayOfWeek;
 @Entity
 public class Period {
     private Integer id;
-    private DayOfWeek dayOfWeek;
+    @Range(min = 1,max = 6)
+    private byte dayOfWeek;
     private OddEvenWeek oddEven;
+    @Range(min = 1,max = 8)
     private byte periodNumber;
     private Classroom classroom;
     private TeacherSubjectInstance teacherSubjectInstance;
@@ -36,16 +38,16 @@ public class Period {
         this.id = id;
     }
 
-    @Column(name = "day_of_week", columnDefinition = "TINYINT",nullable = false)
-    public DayOfWeek getDayOfWeek() {
+    @Column(name = "day_of_week", columnDefinition = "TINYINT", nullable = false)
+    public byte getDayOfWeek() {
         return dayOfWeek;
     }
 
-    public void setDayOfWeek(DayOfWeek dayOfWeek) {
+    public void setDayOfWeek(byte dayOfWeek) {
         this.dayOfWeek = dayOfWeek;
     }
 
-    @Column(name = "odd_even",nullable = false)
+    @Column(name = "odd_even", nullable = false)
     @Enumerated(EnumType.STRING)
     public OddEvenWeek getOddEven() {
         return oddEven;
@@ -55,7 +57,7 @@ public class Period {
         this.oddEven = oddEven;
     }
 
-    @Column(name = "period_number",nullable = false)
+    @Column(name = "period_number", nullable = false)
     public byte getPeriodNumber() {
         return periodNumber;
     }
