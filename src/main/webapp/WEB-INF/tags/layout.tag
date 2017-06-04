@@ -10,11 +10,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Page Description">
     <meta name="author" content="Igor Rybak">
-    <title>Page Title</title>
+    <title>Virtual University</title>
 
     <link rel="stylesheet" href="/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css">
     <link rel="stylesheet" href="/webjars/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="/main.css">
+    <link rel="stylesheet" href="/style/main.css">
 </head>
 <body>
 
@@ -70,6 +70,8 @@
 
 <script src="/webjars/jquery/1.11.1/jquery.min.js"></script>
 <script src="/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js"></script>
+<script src="/js/jquery.autocomplete.min.js"></script>
+<script src="/js/main.js"></script>
 
 </body>
 </html>

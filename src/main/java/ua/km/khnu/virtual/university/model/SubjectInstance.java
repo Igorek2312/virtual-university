@@ -4,6 +4,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import ua.km.khnu.virtual.university.refrence.Semester;
 
 import javax.persistence.*;
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
@@ -22,6 +23,7 @@ public class SubjectInstance {
     private LocalDate dateEnd;
     private int hours;
     @NotNull
+    @Valid
     private Subject subject;
     private Group group;
 

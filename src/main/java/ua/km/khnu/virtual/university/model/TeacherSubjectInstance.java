@@ -1,6 +1,7 @@
 package ua.km.khnu.virtual.university.model;
 
 import javax.persistence.*;
+import javax.validation.Valid;
 import java.text.MessageFormat;
 
 /**
@@ -48,6 +49,7 @@ public class TeacherSubjectInstance {
 
     @ManyToOne
     @JoinColumn(name = "teacher_id", referencedColumnName = "id", nullable = false)
+    @Valid
     public Teacher getTeacher() {
         return teacher;
     }

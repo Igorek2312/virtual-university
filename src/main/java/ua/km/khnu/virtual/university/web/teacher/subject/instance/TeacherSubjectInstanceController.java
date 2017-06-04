@@ -4,11 +4,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import ua.km.khnu.virtual.university.model.SubjectInstance;
+import ua.km.khnu.virtual.university.model.Teacher;
 import ua.km.khnu.virtual.university.model.TeacherSubjectInstance;
 import ua.km.khnu.virtual.university.refrence.Semester;
 import ua.km.khnu.virtual.university.repositories.TeacherRepository;
@@ -58,18 +60,18 @@ public class TeacherSubjectInstanceController {
 
     @PostMapping("/subject-instances/{subjectInstanceId}/teacher-subject-instances")
     public String postTeacherSubjectInstance(
-            @ModelAttribute("teacherSubjectInstance") TeacherSubjectInstance teacherSubjectInstance,
+            @ModelAttribute("teacherSubjectInstance") @Validated TeacherSubjectInstance teacherSubjectInstance,
             BindingResult result,
             Model model,
             @PathVariable int subjectInstanceId
     ) {
         if (result.hasErrors()) {
             initModel(model, subjectInstanceId);
-            return "teacher-subject-instances";
+            return "teacher-subject-instance/teacher-subject-instances";
         }
         teacherSubjectInstance.setSubjectInstance(new SubjectInstance(subjectInstanceId));
         teacherSubjectInstanceRepository.save(teacherSubjectInstance);
-        return "redirect:/subject-instances/" + subjectInstanceId + "/teacher-subject-instances";
+        return "redirect:/subject-instances/{subjectInstanceId}/teacher-subject-instances";
     }
 
     @GetMapping("/subject-instances/{subjectInstanceId}/delete-teacher-subject-instance/{teacherSubjectInstanceId}")

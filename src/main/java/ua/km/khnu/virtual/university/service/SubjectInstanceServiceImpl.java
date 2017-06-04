@@ -46,8 +46,9 @@ public class SubjectInstanceServiceImpl implements SubjectInstanceService {
     @Override
     public SubjectInstance prepareNew() {
         SubjectInstance subjectInstance = new SubjectInstance();
-        subjectInstance.setDateBegin(LocalDate.now());
-        subjectInstance.setDateEnd(LocalDate.now());
+        SemesterDateRange range = new Semester(LocalDate.now()).semesterDateRange();
+        subjectInstance.setDateBegin(range.getDateBegin());
+        subjectInstance.setDateEnd(range.getDateEnd());
         subjectInstance.setSubject(new Subject());
         return subjectInstance;
     }

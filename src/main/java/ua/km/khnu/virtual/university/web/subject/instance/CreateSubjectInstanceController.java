@@ -69,13 +69,13 @@ public class CreateSubjectInstanceController {
     @PostMapping("/groups/{groupId}/subject-instances")
     public String postSubjectInstance(
             @ModelAttribute("subjectInstance") @Validated SubjectInstance subjectInstance,
-            Model model,
             BindingResult result,
+            Model model,
             @PathVariable int groupId
     ) {
         if (result.hasErrors()) {
             initModel(model, groupId);
-            return "subject-instance";
+            return "subject/instance/create-subject-instance";
         }
         int subjectId = subjectInstance.getSubject().getId();
         subjectInstanceService.create(subjectInstance, groupId, subjectId);

@@ -93,16 +93,15 @@
                                     </div>
                                 </div>
                             </spring:bind>
-                            <spring:bind path="subject">
+                            <spring:bind path="subject.id">
                                 <div class="form-group ${status.error ? 'has-error' : ''}">
                                     <div class="col-sm-12">
                                         <spring:message code="label.subject" var="subject"/>
-                                        <form:select path="subject" cssClass="form-control">
-                                            <form:options items="${subjects}" itemLabel="name"/>
-                                        </form:select>
+                                        <input id="subject" type="text" class="form-control" placeholder="${subject}">
+                                        <form:input path="subject.id" id="subject_id" type="hidden"/>
                                     </div>
                                     <div class="col-sm-12">
-                                        <form:errors path="subject" cssClass="text-danger"/>
+                                        <form:errors path="subject.id" cssClass="text-danger"/>
                                     </div>
                                 </div>
                             </spring:bind>

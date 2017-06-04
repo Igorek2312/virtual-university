@@ -2,12 +2,14 @@ package ua.km.khnu.virtual.university.model;
 
 import javax.persistence.*;
 import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 
 /**
  * @author Igor Rybak
  */
 @Entity
 public class Teacher {
+    @NotNull
     private Integer id;
     @Valid
     private Account account;

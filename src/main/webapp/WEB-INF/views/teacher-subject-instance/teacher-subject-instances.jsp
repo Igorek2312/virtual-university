@@ -46,16 +46,22 @@
                                action="/subject-instances/${subjectInstanceId}/teacher-subject-instances"
                                method="post"
                                class="form-horizontal" role="form">
-                        <div class="form-group">
-                            <label class="col-sm-4">
-                                <spring:message code="label.teacher"/>
-                            </label>
-                            <div class="col-sm-8">
-                                <form:select path="teacher" type="text" class="form-control">
-                                    <form:options items="${teachers}" itemLabel="account.fullName"/>
-                                </form:select>
+                        <spring:bind path="teacher.id">
+                            <div class="form-group ${status.error ? 'has-error' : ''}">
+                                <label class="col-sm-4">
+                                    <spring:message code="label.teacher"/>
+                                </label>
+                                <div class="col-sm-8">
+                                    <spring:message code="label.teacher" var="teacher"/>
+                                    <input id="teacher" class="form-control" type="text" placeholder="${teacher}">
+                                    <form:input id="teacher_id" type="hidden" path="teacher.id"/>
+                                </div>
+                                <div class="col-sm-12">
+                                    <form:errors path="teacher.id" cssClass="text-danger"/>
+                                </div>
                             </div>
-                        </div>
+                        </spring:bind>
+
                         <div class="form-group">
                             <label class="col-sm-4">
                                 <spring:message code="label.period.type"/>

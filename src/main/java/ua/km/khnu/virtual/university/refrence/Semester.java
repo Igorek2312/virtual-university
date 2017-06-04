@@ -22,6 +22,10 @@ public class Semester {
         return semesterNumber;
     }
 
+    public SemesterDateRange semesterDateRange(){
+        return new SemesterDateRange(year,semesterNumber);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
