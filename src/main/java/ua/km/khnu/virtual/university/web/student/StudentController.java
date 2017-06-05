@@ -2,6 +2,7 @@ package ua.km.khnu.virtual.university.web.student;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.web.SortDefault;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -58,7 +59,11 @@ public class StudentController {
     }
 
     @GetMapping("/groups/{groupId}/students")
-    public String getStudentsByGroup(@PathVariable int groupId, Sort sort, Model model) {
+    public String getStudentsByGroup(
+            @PathVariable int groupId,
+            @SortDefault(value = {"account.lastName","account.firstName"}) Sort sort,
+            Model model
+    ) {
         initModel(groupId, sort, model);
         return "student/students";
     }
@@ -69,7 +74,7 @@ public class StudentController {
             @ModelAttribute("student") @Validated Student student,
             BindingResult result,
             @PathVariable int groupId,
-            Sort sort,
+            @SortDefault(value = {"account.lastName","account.firstName"}) Sort sort,
             Model model
     ) {
         if (result.hasErrors()) {
