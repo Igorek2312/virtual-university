@@ -4,12 +4,14 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
 
 /**
  * @author Igor Rybak
  */
 @Entity
 public class Classroom {
+    @NotNull
     private Integer id;
     private String name;
     private int capacity;

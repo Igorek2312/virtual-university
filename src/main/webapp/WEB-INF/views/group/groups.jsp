@@ -84,8 +84,8 @@
                 <th><spring:message code="label.year.entered"/></th>
                 <th><spring:message code="label.year.of.study.entered"/></th>
                 <th><spring:message code="label.students"/></th>
+                <th></th>
                 <sec:authorize access="hasRole('ROLE_ADMIN')">
-                    <th></th>
                     <th></th>
                 </sec:authorize>
             </tr>

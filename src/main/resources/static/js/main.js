@@ -55,3 +55,32 @@ $('#subject').autocomplete({
         $("#subject_id").val(subject.id);
     }
 });
+
+var classroomLookup = function (query, done) {
+    var settings = {
+        "async": true,
+        "method": "GET",
+        "url": "/search-classrooms?name=" + query
+    };
+
+    return $.ajax(settings).done(function (response) {
+        var content = response.content
+            .map(function (classroom) {
+                classroom.value =classroom.name;
+                return classroom;
+            });
+
+        var result = {
+            suggestions: content
+        };
+
+        done(result);
+    });
+};
+
+$('#classroom').autocomplete({
+    lookup: classroomLookup,
+    onSelect: function (classroom) {
+        $("#classroom_id").val(classroom.id);
+    }
+});

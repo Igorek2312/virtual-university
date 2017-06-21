@@ -71,21 +71,36 @@
                                 <div class="form-group ${status.error ? 'has-error' : ''}">
                                     <label for="periodNumber" class="control-label col-sm-4">Номер пари:</label>
                                     <div class="col-sm-8">
-                                        <form:input path="periodNumber" type="number" value="1" cssClass="form-control"/>
+                                        <form:input path="periodNumber" type="number" value="1"
+                                                    cssClass="form-control"/>
                                     </div>
                                     <div class="col-sm-12">
                                         <form:errors path="periodNumber" cssClass="text-danger"/>
                                     </div>
                                 </div>
                             </spring:bind>
-                            <div class="form-group">
-                                <label for="periodNumber" class="control-label col-sm-4">Аудеторія:</label>
-                                <div class="col-sm-8">
-                                    <form:select path="classroom" cssClass="form-control">
-                                        <form:options items="${classrooms}" itemLabel="name"/>
-                                    </form:select>
+                            <%-- <div class="form-group">
+                                 <label for="periodNumber" class="control-label col-sm-4">Аудеторія:</label>
+                                 <div class="col-sm-8">
+                                     <form:select path="classroom" cssClass="form-control">
+                                         <form:options items="${classrooms}" itemLabel="name"/>
+                                     </form:select>
+                                 </div>
+                             </div>--%>
+                            <spring:bind path="classroom.id">
+                                <div class="form-group ${status.error ? 'has-error' : ''}">
+                                    <label class="col-sm-4">
+                                        <spring:message code="label.classroom"/>
+                                    </label>
+                                    <div class="col-sm-12">
+                                        <input id="classroom" type="text" class="form-control"/>
+                                        <form:input path="classroom.id" id="classroom_id" type="hidden"/>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <form:errors path="classroom.id" cssClass="text-danger"/>
+                                    </div>
                                 </div>
-                            </div>
+                            </spring:bind>
                             <div class="form-group">
                                 <label for="periodNumber" class="control-label col-sm-4">Предмет:</label>
                                 <div class="col-sm-8">

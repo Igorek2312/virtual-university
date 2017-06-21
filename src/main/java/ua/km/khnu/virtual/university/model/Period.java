@@ -5,6 +5,7 @@ import org.hibernate.validator.constraints.Range;
 import ua.km.khnu.virtual.university.refrence.OddEvenWeek;
 
 import javax.persistence.*;
+import javax.validation.Valid;
 
 /**
  * @author Igor Rybak
@@ -17,6 +18,7 @@ public class Period {
     private OddEvenWeek oddEven;
     @Range(min = 1,max = 8)
     private byte periodNumber;
+    @Valid
     private Classroom classroom;
     private TeacherSubjectInstance teacherSubjectInstance;
 
